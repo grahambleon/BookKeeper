@@ -1,0 +1,31 @@
+{
+  "name": "Bookkeeper",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "babel-preset-react": "~6.24.1",
+    "prop-types": "~15.6.0",
+    "react": "~15.4.2",
+    "react-dom": "~15.4.2"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.3",
+    "jest": "^22.4.3",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "scripts": {
+    "start": "./bin/webpack-dev-server",
+    "test": "node_modules/.bin/jest",
+    "test:dev": "node_modules/.bin/jest --notify --watch"
+  },
+  "jest": {
+    "roots": [
+      "spec/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ]
+  }
+}

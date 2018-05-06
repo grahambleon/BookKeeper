@@ -13,8 +13,12 @@
     ],
     "react"
   ],
+  "env": {
+    "test": {
+      "presets": ["react", "env"],
+    }
+  },
   "plugins": [
-    "syntax-dynamic-import",
     "transform-object-rest-spread",
     [
       "transform-class-properties",

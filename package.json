@@ -18,10 +18,11 @@
   "devDependencies": {
     "babel-jest": "^22.4.3",
     "enzyme": "^3.3.0",
-    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-adapter-react-15.4": "^1.0.5",
     "fetch-mock": "^5.13.1",
     "jest": "^22.4.3",
     "jest-enzyme": "^6.0.0",
+    "react-addons-test-utils": "^15.6.2",
     "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^2.11.1"
   },
@@ -39,12 +40,8 @@
       "node_modules",
       "app/javascript"
     ],
-    "moduleFileExtensions": [
-      ".ts",
-      ".tsx",
-      ".js",
-      ".jsx",
-      ".json"
+    "setupFiles": [
+      "./spec/javascript/setupTests.js"
     ]
   }
 }

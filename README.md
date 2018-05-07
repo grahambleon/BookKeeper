@@ -5,3 +5,6 @@
 # README
 
 * Ruby version 2.3.3
+
+
+Favicon(noun_889804_cc.png) created by zidney from Noun Project! www.thenounproject.com

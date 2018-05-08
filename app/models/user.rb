@@ -7,4 +7,8 @@ class User < ApplicationRecord
   validates :email, presence: :true, uniqueness: { case_sensitive: false }
   validates :business_name, presence: :true
   validates :address, presence: :true
+
+  has_many :accounts
+  has_many :invoices, through: :accounts
+  has_many :purchases, through: :invoices
 end

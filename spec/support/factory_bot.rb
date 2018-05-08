@@ -8,5 +8,4 @@ FactoryBot.define do
     business_name 'testaurant'
     address '123 fake street'
   end
-
 end

@@ -27,6 +27,11 @@ RSpec.describe User, type: :model do
       subject.address = nil
       expect(subject).to_not be_valid
     end
+  end
 
+  describe "Associations" do
+    it { should have_many(:accounts) }
+    it { should have_many(:invoices).through(:accounts) }
+    it { should have_many(:purchases).through(:invoices) }
   end
 end

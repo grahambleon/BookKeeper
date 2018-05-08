@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_07_192525) do
+ActiveRecord::Schema.define(version: 2018_05_07_215936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "company_name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "invoice_number", null: false
+    t.decimal "amount", null: false
+    t.string "date_received", null: false
+    t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_invoices_on_account_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.string "product_id", null: false
+    t.string "product_name", null: false
+    t.string "quantity", null: false
+    t.decimal "unit_price", null: false
+    t.bigint "user_id"
+    t.bigint "account_id"
+    t.bigint "invoice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_purchases_on_account_id"
+    t.index ["invoice_id"], name: "index_purchases_on_invoice_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

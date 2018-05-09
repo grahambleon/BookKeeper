@@ -6,6 +6,7 @@ const Routes = (props) => {
   return (
     <Router history={browserHistory}>
       <Route path='/' component={HomePage} />
+      <Route path='/accounts' component={HomePage} />
     </Router>
   );
 }

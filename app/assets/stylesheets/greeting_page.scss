@@ -1,0 +1,27 @@
+@import "./colors";
+
+.rows {
+  margin: auto 10%;
+}
+
+.column.medium-12.text-center.greeting {
+  margin: 5% auto;
+  font-size: 8vw;
+  color: $dark-sienna;
+  text-shadow: 1px 1px 1px $sonic-silver;
+}
+
+.columns.medium-5.text-center.greeting, h2 {
+  background-color: $black-coral;
+  padding: 3rem;
+  font-family: 'Roboto Slab', serif;
+  font-size: 36px;
+  color: $dark-sienna;
+  text-shadow: 1px 1px 1px #607599;
+}
+
+label, em {
+  color: $dark-sienna;
+  font-size: 16px;
+  text-align: left;
+}

@@ -1,15 +1,11 @@
 <div class="row">
-    <% if current_user %>
-      <div class="columns medium-6 text-center">
-        <button class="button expand secondary">See your invoices</button>
-      </div>
-      <div class="columns medium-6 text-center">
-        <button class="button expand secondary">New invoice</button>
-      </div>
-    <% else %>
-      <div class="column text-center">
-        <div class="secondary">Welcome to Bookkeeper</div>
-        <div class="secondary">Make an account or sign in to get started.<div>
-      </div>
-    <% end %>
+  <% if %>
+    <div id="app">
+    </div>
+  <% else %>
+    <div class="column text-center">
+      <div class="secondary">Welcome to Bookkeeper</div>
+      <div class="secondary">Make an account or sign in to get started.<div>
+    </div>
+  <% end %>
 </div>

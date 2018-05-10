@@ -7,4 +7,7 @@ Rails.application.routes.draw do
       resources :accounts
     end
   end
+
+  resources :accounts, only: [:index]
+  resources :invoices, only: [:new]
 end

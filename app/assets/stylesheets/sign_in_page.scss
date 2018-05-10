@@ -1,0 +1,20 @@
+@import "./colors";
+
+#sign-in-form {
+  background-color: $black-coral;
+  padding: 3rem;
+  font-family: 'Roboto Slab', serif;
+  font-size: 36px;
+  color: $dark-sienna;
+  text-shadow: 1px 1px 1px #607599;
+}
+
+#links {
+  font-size: 2.2vw;
+}
+.column.medium-12.text-center {
+  margin: 5% auto;
+  font-size: 8vw;
+  color: $dark-sienna;
+  text-shadow: 1px 1px 1px $sonic-silver;
+}

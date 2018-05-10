@@ -1,0 +1,23 @@
+@import "./colors";
+
+body {
+  font-family: 'Roboto Slab', serif;
+  background-color: $very-pale-orange;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button), #bookkeeper {
+   background: $dark-sienna;
+   color: $very-pale-orange;
+ }
+
+ .top-bar {
+   background-color: $dark-sienna;
+   overflow: scroll;
+ }
+
+ .flash.flash-notice {
+   color: $very-pale-orange;
+   background-color: $dark-sienna;
+   padding: .5rem;
+   font-family: 'Roboto Slab', serif;
+ }

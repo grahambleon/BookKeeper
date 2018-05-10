@@ -12,6 +12,7 @@
  *
  *= require_self
  *= require foundation_and_overrides
- *= require custom_styling
- *= require variables
+ *= require global_styling
+ *= require greeting_page
+ *= require sign_in_page
  */

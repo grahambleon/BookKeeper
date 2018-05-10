@@ -39,7 +39,8 @@ ActiveRecord::Schema.define(version: 2018_05_07_215936) do
     t.string "product_id", null: false
     t.string "product_name", null: false
     t.string "quantity", null: false
-    t.decimal "unit_price", null: false
+    t.string "unit_price", null: false
+    t.decimal "total_price", null: false
     t.bigint "user_id"
     t.bigint "account_id"
     t.bigint "invoice_id"

@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
    devise_parameter_sanitizer.permit(:account_update, keys: [:business_name, :address, :email, :password, :password_confirmation, :current_password])
   end
+
+  def check_user_auth
+    unless current_user
+      redirect_to new_user_registration_path
+    end
+  end
 end

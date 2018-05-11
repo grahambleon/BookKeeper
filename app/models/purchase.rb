@@ -3,6 +3,7 @@ class Purchase < ApplicationRecord
   validates :product_name, presence: true
   validates :quantity, presence: true
   validates :unit_price, presence: true
+  validates :total_price, presence: true
 
   belongs_to :user
   belongs_to :account

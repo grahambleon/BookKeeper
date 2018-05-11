@@ -4,7 +4,7 @@ RSpec.describe Purchase, type: :model do
   let(:user) { User.create!(email: "me@aol.com", business_name: "ehhh", password: "123456", address:"123 fake street") }
   let(:account) { Account.create!(company_name: "Russo's", user: user) }
   let(:invoice) { Invoice.create!(invoice_number: "1337", amount: 200.00, date_received: "2/4/2017", account: account, user: user) }
-  subject { described_class.create!(product_id: "0293874", product_name: "Taters", quantity: "30 lbs",  unit_price: 3.00, account: account, user: user, invoice: invoice) }
+  subject { described_class.create!(product_id: "0293874", product_name: "Taters", quantity: "30 lbs",  unit_price: 3.00, total_price: 90.00, account: account, user: user, invoice: invoice) }
 
   describe "Validations" do
     it "is valid when provided valid attributes" do
@@ -28,6 +28,11 @@ RSpec.describe Purchase, type: :model do
 
     it "is not valid without a unit_price" do
       subject.unit_price = nil
+      expect(subject).to_not be_valid
+    end
+
+    it "is not valid without a total_price" do
+      subject.total_price = nil
       expect(subject).to_not be_valid
     end
   end

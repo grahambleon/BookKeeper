@@ -33,7 +33,6 @@ class HomePage extends React.Component {
  }
 
   render() {
-    console.log(this.state);
     let page;
     page = this.state.userData.map((account) => {
       return (

@@ -15,11 +15,9 @@ describe('<AccountTile />', () => {
     expect(wrapper.length).toBe(1);
   })
 
-  it('has the value given by props', () => {
-    expect(wrapper.props()).toEqual({ "name": "Russos", "value": "1" })
-  })
-
-  it('renders a div with text', () => {
-    expect(wrapper.text()).toEqual('Russos');
+  it('has the correct text and value given by props', () => {
+    expect(wrapper.containsMatchingElement(
+      <div value='1' className="account-tile">Russos</div>
+    ))
   })
 })

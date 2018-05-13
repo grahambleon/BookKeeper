@@ -1,18 +1,10 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import FullInvoice from '../../../app/javascript/components/full-invoice';
-
+import testPurchases from '../fixtures/testPurchases.json'
 
 describe('<FullInvoice />', () => {
-  let testPurchases;
-  testPurchases = [{
-    "id": "1",
-    "product_id": "0293874",
-    "product_name": "Taters",
-    "quantity": "30 lbs",
-    "unit_price": "3.00 per pound",
-    "total_price": "90.0"
-  }]
+
   const wrapper = mount(
     <FullInvoice
       purchases={testPurchases}
@@ -24,22 +16,6 @@ describe('<FullInvoice />', () => {
 
   it('renders properly', () => {
     expect(wrapper.length).toBe(1);
-  })
-
-  it('has the correct props', () => {
-    expect(wrapper.props()).toEqual({
-      "amount": "200.0",
-      "date": "2/4/2017",
-      "invoice_number": "1337",
-      "purchases": [{
-        "id": "1",
-        "product_id": "0293874",
-        "product_name": "Taters",
-        "quantity": "30 lbs",
-        "total_price": "90.0",
-        "unit_price": "3.00 per pound"
-      }]
-    })
   })
 
   it('renders the correct text', () => {

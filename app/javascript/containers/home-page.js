@@ -1,6 +1,7 @@
 import React from 'react';
 import InvoiceList from './invoice-list';
 import AccountTile from '../components/account-tile'
+import InvoiceFormContainer from './invoice-form-container'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -49,7 +50,10 @@ class HomePage extends React.Component {
     })
 
     return (
-      <div>{page}</div>
+      <div>
+        <div>{page}</div>
+        <InvoiceFormContainer />
+      </div>
     )
   }
 }

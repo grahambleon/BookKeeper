@@ -12,7 +12,8 @@ describe('<Purchase />', () => {
     unit_price='3.00 per pound'
     quantity='30 lbs'
     total_price='90.0'
-   />)
+   />
+ )
 
  it('renders properly', () => {
    expect(wrapper.length).toBe(1);

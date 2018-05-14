@@ -15,4 +15,5 @@
  *= require global_styling
  *= require greeting_page
  *= require sign_in_page
+ *= require home_page 
  */

@@ -1,27 +1,53 @@
 import React from 'react';
 import InvoiceFormField from '../components/invoice-form-field';
 import Purchase from '../components/purchase'
+import CompanyDropdown from '../components/company-dropdown'
 
 class InvoiceFormContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userData: [],
       pendingSubmissions: [],
-      companyName: '',
+      companyId: '',
       invoiceNumber: '',
       amount: '',
+      date: '',
       productId: '',
       productName: '',
       quantity: '',
       unitPrice: '',
       totalPrice: ''
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.addNewData = this.addNewData.bind(this)
     this.addPurchase = this.addPurchase.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleInvoiceSubmit = this.handleInvoiceSubmit.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value })
+  addNewData(payload, url) {
+    fetch(url, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        userData: this.state.userData.concat(body)
+      });
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
   addPurchase(event) {
@@ -43,10 +69,61 @@ class InvoiceFormContainer extends React.Component {
     })
   }
 
-  render() {
-    console.log(this.state);
+  componentDidMount() {
+   fetch(`/api/v1/accounts`, {
+     credentials: 'same-origin',
+     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+   })
+   .then(response => {
+     if (response.ok) {
+       return response;
+     } else {
+       let errorMessage = `${response.status} (${response.statusText})`,
+         error = new Error(errorMessage);
+       throw(error);
+     }
+   })
+   .then(response => response.json())
+   .then(body => {
+     this.setState({
+       userData: body
+     });
+   })
+   .catch(error => console.error (`Error in fetch: ${error.message}`));
+  }
 
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleInvoiceSubmit(event) {
+    event.preventDefault()
+    let newInvoice = {
+      "company_id": this.state.companyId,
+      "invoice_number": this.state.invoiceNumber,
+      "amount": this.state.amount,
+      "date": this.state.date,
+      "purchases": this.state.pendingSubmissions
+    }
+    this.props.submitNewData(newInvoice, `/api/v1/invoices.json`)
+    this.setState({
+      pendingSubmissions: [],
+      companyId: '',
+      invoiceNumber: '',
+      amount: '',
+      date: '',
+      productId: '',
+      productName: '',
+      quantity: '',
+      unitPrice: '',
+      totalPrice: ''
+    })
+  }
+
+  render() {
+console.log(this.state);
     let purchases = [];
+    let companyList = [];
     purchases = this.state.pendingSubmissions.map((purchase) => {
       return(
         <Purchase
@@ -60,13 +137,23 @@ class InvoiceFormContainer extends React.Component {
       )
     })
 
+    companyList = this.state.userData.map((company) => {
+      return (
+        { "id": company.id,
+          "company_name": company.company_name
+        }
+      )
+    })
+
     return(
       <div>
+        <p>New Invoice:</p>
         <form>
-          <InvoiceFormField
-            label='Company Name'
-            name='companyName'
-            value={this.state.companyName}
+          <CompanyDropdown
+            companyList={companyList}
+            label='Account Name'
+            name='companyId'
+            value={this.state.companyId}
             handleChange={this.handleChange}
           />
           <InvoiceFormField
@@ -79,6 +166,12 @@ class InvoiceFormContainer extends React.Component {
             label='Amount Owed'
             name='amount'
             value={this.state.amount}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Date Received'
+            name='date'
+            value={this.state.date}
             handleChange={this.handleChange}
           />
 
@@ -116,9 +209,9 @@ class InvoiceFormContainer extends React.Component {
             value={this.state.totalPrice}
             handleChange={this.handleChange}
           />
-          <button className="button" type="submit" onClick={this.addPurchase}>Save Purchase</button>
+          <button className="button" type="button" onClick={this.addPurchase}>Save Purchase</button>
+          <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
         </form>
-
       </div>
     )
   }

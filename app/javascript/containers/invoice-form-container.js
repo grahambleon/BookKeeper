@@ -3,6 +3,7 @@ import InvoiceFormField from '../components/invoice-form-field';
 import Purchase from '../components/purchase';
 import CompanyDropdown from '../components/company-dropdown';
 import DateFormField from '../components/date-form-field';
+import ImageUploader from '../components/image-uploader'
 
 class InvoiceFormContainer extends React.Component {
   constructor(props) {
@@ -192,7 +193,9 @@ class InvoiceFormContainer extends React.Component {
                 value={this.state.amount}
                 handleChange={this.handleChange}
               />
-              <p>Purchase Info:</p>
+              <ImageUploader />
+
+              <h4>Enter Purchase:</h4>
               <InvoiceFormField
                 label='Product Id'
                 name='productId'

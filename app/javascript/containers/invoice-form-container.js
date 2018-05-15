@@ -105,7 +105,7 @@ class InvoiceFormContainer extends React.Component {
       "date": this.state.date,
       "purchases": this.state.pendingSubmissions
     }
-    this.props.submitNewData(newInvoice, `/api/v1/invoices.json`)
+    this.addNewData(newInvoice, `/api/v1/invoices.json`)
     this.setState({
       pendingSubmissions: [],
       companyId: '',

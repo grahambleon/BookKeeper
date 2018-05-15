@@ -19,7 +19,7 @@ describe('<FullInvoice />', () => {
   })
 
   it('renders the correct text', () => {
-    expect(wrapper.text()).toEqual('Invoice number: 1337 Received: 2/4/2017 Amount owed: 200.0 Product Name | Product ID | Unit Price | Quantity | Total Taters | 0293874 | 3.00 per pound | 30 lbs | 90.0');
+    expect(wrapper.text()).toEqual('Invoice number: 1337 Received: 2/4/2017 Amount owed: 200.0 Product Name | Product ID | Unit Price | Quantity | Total Taters | #0293874 | $3.00 per pound | 30 lbs | $90.0');
   })
 
 })

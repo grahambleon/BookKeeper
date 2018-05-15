@@ -23,6 +23,7 @@ class InvoiceFormContainer extends React.Component {
     this.addNewData = this.addNewData.bind(this)
     this.addPurchase = this.addPurchase.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
     this.handleInvoiceSubmit = this.handleInvoiceSubmit.bind(this)
   }
 
@@ -93,6 +94,10 @@ class InvoiceFormContainer extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleDateChange(date) {
+    this.setState({ date: date.format('L')})
   }
 
   handleInvoiceSubmit(event) {
@@ -179,11 +184,10 @@ class InvoiceFormContainer extends React.Component {
                 label='Date Received'
                 name='date'
                 value={this.state.date}
-                handleChange={this.handleChange}
+                handleChange={this.handleDateChange}
               />
               <InvoiceFormField
                 label='Amount Owed'
-                name='amount'
                 value={this.state.amount}
                 handleChange={this.handleChange}
               />

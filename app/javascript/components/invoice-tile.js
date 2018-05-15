@@ -32,8 +32,8 @@ class InvoiceTile extends React.Component {
     }
 
     return (
-      <div onClick={this.showInvoice} className="invoice-tile">
-        <h5>Invoice number: {this.props.invoice_number} Received: {this.props.date} Amount owed: ${this.props.amount}</h5>
+      <div onClick={this.showInvoice} className="text-left invoice-tile">
+        <li>Invoice number: {this.props.invoice_number} | Received: {this.props.date} | Amount owed: ${this.props.amount}</li>
         {overlay}
       </div>
     )

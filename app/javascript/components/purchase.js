@@ -2,7 +2,7 @@ import React from 'react';
 
 const Purchase = (props) => {
   return (
-    <div>{props.product_id} | {props.product_name} | {props.unit_price} | {props.quantity} | {props.total_price}</div>
+    <h5> {props.product_name} | {props.product_id} | {props.unit_price} | {props.quantity} | {props.total_price}</h5>
   )
 }
 

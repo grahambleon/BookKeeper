@@ -20,7 +20,8 @@ const FullInvoice = (props) => {
     <div className="text-center">
       <div className="overlay">
         <div className="column medium-6 medium-centered text-center invoice">
-          <h5>Invoice number: {props.invoice_number} Received: {props.date} Amount owed: {props.amount}</h5>
+          <div>Invoice number: {props.invoice_number} Received: {props.date} Amount owed: {props.amount}</div>
+            <h5> Product Name | Product ID | Unit Price | Quantity | Total</h5>
           <ul>{allPurchases}</ul>
         </div>
       </div>

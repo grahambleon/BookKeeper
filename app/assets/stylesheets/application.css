@@ -17,4 +17,8 @@
  *= require sign_in_page
  *= require home_page
  *= require invoice_form
+
  */
+* {
+  font-family: 'Roboto Slab', serif !important;
+}

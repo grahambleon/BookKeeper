@@ -34,6 +34,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'shoulda'
+  gem "test-unit", "~> 3.2"
 end
 
 group :test do
@@ -63,3 +64,5 @@ gem 'devise'
 gem 'foundation-rails', '~> 5.0'
 gem 'webpacker', '~> 3.3'
 gem 'seed_dump'
+
+# Added at 2018-05-15 19:33:12 -0400 by lolimpro:

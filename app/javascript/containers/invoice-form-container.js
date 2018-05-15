@@ -17,7 +17,7 @@ class InvoiceFormContainer extends React.Component {
       productName: '',
       quantity: '',
       unitPrice: '',
-      totalPrice: ''
+      totalPrice: '',
     }
     this.addNewData = this.addNewData.bind(this)
     this.addPurchase = this.addPurchase.bind(this)
@@ -43,9 +43,7 @@ class InvoiceFormContainer extends React.Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({
-        userData: this.state.userData.concat(body)
-      });
+      window.alert(`Successfully submitted invoice #${body.invoice_number}`);
     })
     .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
@@ -121,9 +119,10 @@ class InvoiceFormContainer extends React.Component {
   }
 
   render() {
-console.log(this.state);
     let purchases = [];
     let companyList = [];
+    let currentCompany = [];
+
     purchases = this.state.pendingSubmissions.map((purchase) => {
       return(
         <Purchase
@@ -145,73 +144,84 @@ console.log(this.state);
       )
     })
 
+    currentCompany = this.state.userData.find(company => company.id === this.state.companyId)
+    console.log(this.state.companyId, this.state.userData);
+
     return(
       <div>
-        <p>New Invoice:</p>
-        <form>
-          <CompanyDropdown
-            companyList={companyList}
-            label='Account Name'
-            name='companyId'
-            value={this.state.companyId}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Invoice Number'
-            name='invoiceNumber'
-            value={this.state.invoiceNumber}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Amount Owed'
-            name='amount'
-            value={this.state.amount}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Date Received'
-            name='date'
-            value={this.state.date}
-            handleChange={this.handleChange}
-          />
-
-        <div>Purchases:</div>
-
-        <div>{purchases}</div>
-
-          <InvoiceFormField
-            label='Product Id'
-            name='productId'
-            value={this.state.productId}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Product Name'
-            name='productName'
-            value={this.state.productName}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Quantity'
-            name='quantity'
-            value={this.state.quantity}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Unit Price'
-            name='unitPrice'
-            value={this.state.unitPrice}
-            handleChange={this.handleChange}
-          />
-          <InvoiceFormField
-            label='Total Price'
-            name='totalPrice'
-            value={this.state.totalPrice}
-            handleChange={this.handleChange}
-          />
-          <button className="button" type="button" onClick={this.addPurchase}>Save Purchase</button>
-          <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
-        </form>
+        <div className='rows'>
+          <div> </div>
+        </div>
+        <div className='rows'>
+          <div className='column medium-5 text-center invoice'>
+            <h5>Invoice number: {this.state.invoiceNumber} | Received: {this.state.date} | Amount owed: ${this.state.amount}</h5>
+            <h5> Product Name | Product ID | Unit Price | Quantity | Total</h5>
+            <div>{purchases}</div>
+          </div>
+          <div className='column text-left medium-5'>
+            <p>New Invoice:</p>
+            <form>
+              <CompanyDropdown
+                companyList={companyList}
+                label='Account Name'
+                name='companyId'
+                value={this.state.companyId}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Invoice Number'
+                name='invoiceNumber'
+                value={this.state.invoiceNumber}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Date Received'
+                name='date'
+                value={this.state.date}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Amount Owed'
+                name='amount'
+                value={this.state.amount}
+                handleChange={this.handleChange}
+              />
+              <p>Purchase Info:</p>
+              <InvoiceFormField
+                label='Product Id'
+                name='productId'
+                value={this.state.productId}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Product Name'
+                name='productName'
+                value={this.state.productName}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Quantity'
+                name='quantity'
+                value={this.state.quantity}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Unit Price'
+                name='unitPrice'
+                value={this.state.unitPrice}
+                handleChange={this.handleChange}
+              />
+              <InvoiceFormField
+                label='Total Price'
+                name='totalPrice'
+                value={this.state.totalPrice}
+                handleChange={this.handleChange}
+              />
+              <button className="button" type="button" onClick={this.addPurchase}>Save Purchase</button>
+              <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }

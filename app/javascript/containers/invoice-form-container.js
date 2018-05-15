@@ -151,7 +151,7 @@ class InvoiceFormContainer extends React.Component {
     })
 
     currentCompany = this.state.userData.find(company => company.id === this.state.companyId)
-    console.log(this.state.companyId, this.state.userData);
+    console.log(this.state.amount);
 
     return(
       <div>
@@ -169,7 +169,7 @@ class InvoiceFormContainer extends React.Component {
             <form>
               <CompanyDropdown
                 companyList={companyList}
-                label='Account Name'
+                label='Account'
                 name='companyId'
                 value={this.state.companyId}
                 handleChange={this.handleChange}
@@ -188,6 +188,7 @@ class InvoiceFormContainer extends React.Component {
               />
               <InvoiceFormField
                 label='Amount Owed'
+                name='amount'
                 value={this.state.amount}
                 handleChange={this.handleChange}
               />

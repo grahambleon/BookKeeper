@@ -1,8 +1,21 @@
 @import "./colors";
 
 body {
-  font-family: 'Roboto Slab', serif;
-  background-color: $very-pale-orange;
+ font-family: 'Roboto Slab', serif;
+ background-color: $very-pale-orange;
+}
+
+body::after {
+  content: "";
+  background-image: url('images/background.jpeg');
+  background-size: cover;
+  opacity: 0.05;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .top-bar-section li:not(.has-form) a:not(.button), #bookkeeper {

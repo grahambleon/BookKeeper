@@ -7,7 +7,12 @@ const DateFormField = (props) => {
       <label>
         {props.label}
       </label>
-      <Datetime timeFormat={false} />
+      <Datetime
+        input={false}
+        timeFormat={false}
+        value={props.value}
+        onChange={props.handleChange}
+      />
     </div>
   )
 }

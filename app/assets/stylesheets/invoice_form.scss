@@ -1,17 +1,22 @@
 @import "./colors";
 
-.column.medium-5.text-center.invoice {
-  background-color: $black-coral;
-  padding: 3rem;
-  font-family: 'Roboto Slab', serif;
-  font-size: 36px;
-  color: $dark-sienna;
+.row.form {
+  margin: 1% auto;
 }
 
-.column.text-left.medium-5 {
+.column.small-8.text-center.invoice {
+  width: fit-content;
   background-color: $black-coral;
-  padding: 3rem;
-  font-family: 'Roboto Slab', serif;
+  padding: 1.5%;
   font-size: 36px;
   color: $dark-sienna;
+  box-shadow: -3.5px 4px 0px #163463;
+}
+
+.column.small-4.text-center.form {
+  background-color: $black-coral;
+  padding: 1.5%;
+  font-size: 36px;
+  color: $dark-sienna;
+  box-shadow: -3.5px 4px 0px #163463;
 }

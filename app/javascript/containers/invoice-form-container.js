@@ -1,7 +1,8 @@
 import React from 'react';
 import InvoiceFormField from '../components/invoice-form-field';
-import Purchase from '../components/purchase'
-import CompanyDropdown from '../components/company-dropdown'
+import Purchase from '../components/purchase';
+import CompanyDropdown from '../components/company-dropdown';
+import DateFormField from '../components/date-form-field';
 
 class InvoiceFormContainer extends React.Component {
   constructor(props) {
@@ -159,7 +160,7 @@ class InvoiceFormContainer extends React.Component {
             <div>{purchases}</div>
           </div>
           <div className='column text-left medium-5'>
-            <p>New Invoice:</p>
+            <p>New Invoice:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button></p>
             <form>
               <CompanyDropdown
                 companyList={companyList}
@@ -174,7 +175,7 @@ class InvoiceFormContainer extends React.Component {
                 value={this.state.invoiceNumber}
                 handleChange={this.handleChange}
               />
-              <InvoiceFormField
+              <DateFormField
                 label='Date Received'
                 name='date'
                 value={this.state.date}
@@ -218,7 +219,6 @@ class InvoiceFormContainer extends React.Component {
                 handleChange={this.handleChange}
               />
               <button className="button" type="button" onClick={this.addPurchase}>Save Purchase</button>
-              <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
             </form>
           </div>
         </div>

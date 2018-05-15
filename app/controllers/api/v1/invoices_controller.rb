@@ -17,7 +17,7 @@ class Api::V1::InvoicesController < ApplicationController
         invoice: @invoice
       )
 
-    render json: @account, include: ['invoices', 'invoices.purchases']
+    render json: @invoice, include: ['purchases']
     end
   end
 

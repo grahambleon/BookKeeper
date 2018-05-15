@@ -26,7 +26,7 @@ class InvoiceTile extends React.Component {
       overlay = <FullInvoice
         purchases={this.props.purchases}
         invoice_number={this.props.invoice_number}
-        date={this.props.date_received}
+        date={this.props.date}
         amount={this.props.amount}
       />
     }

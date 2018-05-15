@@ -150,7 +150,6 @@ class InvoiceFormContainer extends React.Component {
       )
     })
 
-    console.log(currentCompany);
     return(
       <div>
         <div className='row form'>

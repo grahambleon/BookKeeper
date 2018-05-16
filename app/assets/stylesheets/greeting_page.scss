@@ -1,22 +1,26 @@
 @import "./colors";
 
-.rows {
-  margin: auto 10%;
+.row.greeting-page {
+  margin: 10% auto;
 }
 
-.column.medium-12.text-center.greeting {
-  margin: 5% auto;
-  font-size: 8vw;
+.columns.small-8.text-center.greeting {
+  max-width: 50%;
+  padding: 2%;
+  font-size: 36px;
   color: $dark-sienna;
-  text-shadow: 1px 1px 1px $sonic-silver;
+  background-color: $black-coral;
 }
 
-.columns.medium-5.text-center.greeting, h2 {
+.banner {
+  color: $dark-sienna;
+}
+
+.columns.small-4.text-center.signup {
   background-color: $black-coral;
   padding: 3rem;
   font-size: 36px;
-  color: $dark-sienna;
-  text-shadow: 1px 1px 1px #607599;
+  color: $dark-sienna !important;
 }
 
 label, em {

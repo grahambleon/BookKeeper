@@ -1,11 +1,12 @@
 <div class="row">
   <div class="column medium-12 text-center">
-    Log in
+
   </div>
 </div>
 
 <div class="row">
   <div id="sign-in-form" class="column medium-6 medium-centered text-center">
+    <h2 class='banner'>Log in</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email %>
@@ -28,11 +29,12 @@
         <%= f.submit "Log in" %>
       </div>
     <% end %>
+    <%= render "devise/shared/links" %>
   </div>
 </div>
 
 <div class="row">
   <div id="links" class="column medium-12 text-center">
-    <%= render "devise/shared/links" %>
+
   </div>
 </div>

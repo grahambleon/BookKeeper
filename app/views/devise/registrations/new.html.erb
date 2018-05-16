@@ -1,15 +1,11 @@
-<div class="row">
-  <div class="column medium-12 text-center greeting">
-  </div>
-</div>
-<div class="row">
-  <div class="columns medium-5 text-center">
-    <div class="secondary">Welcome to Bookkeeper</div>
+<div class="row greeting-page">
+  <div class="columns small-8 text-center greeting">
+    <div class="secondary">Welcome to Bookkeeper!</div>
     <div class="secondary">Make an account or <%= link_to 'sign in', new_user_session_path %> to get started.</div>
   </div>
 
-  <div class="columns medium-5 text-center greeting">
-    <h2>Sign up</h2>
+  <div class="columns small-4 text-center signup">
+    <h2 class="banner">Sign up</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>

@@ -19,8 +19,17 @@
 
 .invoice-item {
   background-color: $black-coral;
-  padding: 5%;
+  padding: 2%;
   border-bottom: solid black;
+  color: $dark-sienna;
+}
+
+.account-tile {
+  font-size: xx-large;
+  color: $black-coral;
+  padding: 2%;
+  border-bottom: solid black;
+  background-color: $dark-sienna;
 }
 
 label, em {

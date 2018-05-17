@@ -3,6 +3,7 @@ class Api::V1::InvoicesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def create
+    binding.pry
     @account = Account.find_by(id: params["company_id"])
     @invoice = Invoice.create!(invoice_number: params["invoice_number"], amount: params["amount"], date_received: params["date"], user: current_user, account: @account)
     params["purchases"].each do |purchase|
@@ -16,7 +17,7 @@ class Api::V1::InvoicesController < ApplicationController
         account: @account,
         invoice: @invoice
       )
-binding.pry
+
     render json: @invoice, include: ['purchases']
     end
   end

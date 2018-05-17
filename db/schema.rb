@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_15_175012) do
+ActiveRecord::Schema.define(version: 2018_05_17_222844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 2018_05_15_175012) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_name"], name: "index_accounts_on_company_name"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "invoices", force: :cascade do |t|
     t.string "invoice_number", null: false
-    t.decimal "amount", precision: 5, scale: 2, null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
     t.date "date_received", null: false
     t.bigint "account_id", null: false
     t.bigint "user_id", null: false
@@ -33,6 +34,8 @@ ActiveRecord::Schema.define(version: 2018_05_15_175012) do
     t.datetime "updated_at", null: false
     t.string "invoice_image"
     t.index ["account_id"], name: "index_invoices_on_account_id"
+    t.index ["date_received"], name: "index_invoices_on_date_received"
+    t.index ["invoice_number"], name: "index_invoices_on_invoice_number"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
@@ -41,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_05_15_175012) do
     t.string "product_name", null: false
     t.string "quantity", null: false
     t.string "unit_price", null: false
-    t.decimal "total_price", precision: 5, scale: 2, null: false
+    t.decimal "total_price", precision: 10, scale: 2, null: false
     t.bigint "user_id"
     t.bigint "account_id"
     t.bigint "invoice_id"

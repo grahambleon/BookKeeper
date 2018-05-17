@@ -5,7 +5,7 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
       t.string :product_name, null: false
       t.string :quantity, null: false
       t.string :unit_price, null: false
-      t.decimal :total_price, precision: 5, scale: 2, null: false
+      t.decimal :total_price, precision: 10, scale: 2, null: false
 
       t.belongs_to :user
       t.belongs_to :account

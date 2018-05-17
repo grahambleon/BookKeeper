@@ -20,3 +20,22 @@
   color: $dark-sienna;
   box-shadow: -3.5px 4px 0px #163463;
 }
+
+.dropzone-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.special-field {
+  padding-left: 15%;
+  margin: auto;
+  padding: auto;
+}
+
+td:hover {
+  background-color: #068BB7;
+}
+
+td:active {
+  background-color: #163463;
+}

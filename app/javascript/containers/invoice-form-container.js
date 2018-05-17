@@ -3,6 +3,7 @@ import InvoiceFormField from '../components/invoice-form-field';
 import Purchase from '../components/purchase';
 import CompanyDropdown from '../components/company-dropdown';
 import DateFormField from '../components/date-form-field';
+import Dropzone from 'react-dropzone';
 
 class InvoiceFormContainer extends React.Component {
   constructor(props) {
@@ -18,13 +19,15 @@ class InvoiceFormContainer extends React.Component {
       productName: '',
       quantity: '',
       unitPrice: '',
-      totalPrice: ''
+      totalPrice: '',
+      picture: []
     }
     this.addNewData = this.addNewData.bind(this)
     this.addPurchase = this.addPurchase.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
     this.handleInvoiceSubmit = this.handleInvoiceSubmit.bind(this)
+    this.clearImage = this.clearImage.bind(this)
   }
 
   addNewData(payload, url) {
@@ -67,6 +70,10 @@ class InvoiceFormContainer extends React.Component {
       totalPrice: '',
       pendingSubmissions: this.state.pendingSubmissions.concat(formPayload)
     })
+  }
+
+  clearImage() {
+    this.setState ({ picture: [] })
   }
 
   componentDidMount() {
@@ -124,10 +131,24 @@ class InvoiceFormContainer extends React.Component {
     })
   }
 
+  onDrop(picture) {
+    this.setState({
+      picture
+    });
+  }
+
   render() {
+    console.log(this.state.picture);
     let purchases = [];
     let companyList = [];
     let currentCompany = [];
+    let dropzoneIcon = '';
+
+    if (this.state.picture.length) {
+      dropzoneIcon = this.state.picture.map((file) => <img key={1} src={file.preview} />)
+    } else {
+      dropzoneIcon = <p>Drag a picture of your invoice here or click to choose the file.</p>
+    }
 
     purchases = this.state.pendingSubmissions.map((purchase) => {
       return(
@@ -186,6 +207,14 @@ class InvoiceFormContainer extends React.Component {
                 value={this.state.date}
                 handleChange={this.handleDateChange}
               />
+              <Dropzone
+                onDrop={this.onDrop.bind(this)}
+                multiple={false}
+              >
+                {dropzoneIcon}
+              </Dropzone>
+              <button type='button' onClick={this.clearImage}>Remove Image</button><br />
+
               <p>Purchase Info:</p>
               <InvoiceFormField
                 label='Product Id'

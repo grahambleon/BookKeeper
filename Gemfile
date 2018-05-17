@@ -35,12 +35,9 @@ gem 'fog'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-<<<<<<< HEAD
   gem 'dotenv-rails'
-=======
   gem 'shoulda'
   gem "test-unit", "~> 3.2"
->>>>>>> eea24658a5e77f78a705657f86552ac8035aec87
 end
 
 group :test do

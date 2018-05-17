@@ -114,6 +114,7 @@ class InvoiceFormContainer extends React.Component {
       "invoice_number": this.state.invoiceNumber,
       "amount": this.state.amount,
       "date": this.state.date,
+      "invoice_image": this.state.picture,
       "purchases": this.state.pendingSubmissions
     }
     this.addNewData(newInvoice, `/api/v1/invoices.json`)

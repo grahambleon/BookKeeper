@@ -34,8 +34,7 @@ class InvoiceFormContainer extends React.Component {
     fetch(url, {
       credentials: 'same-origin',
       method: 'POST',
-      body: JSON.stringify(payload),
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      body: payload
     })
     .then(response => {
       if (response.ok) {
@@ -109,18 +108,18 @@ class InvoiceFormContainer extends React.Component {
 
   handleInvoiceSubmit(event) {
     event.preventDefault()
-    let newInvoice = {
-      "company_id": this.state.companyId,
-      "invoice_number": this.state.invoiceNumber,
-      "amount": this.state.amount,
-      "date": this.state.date,
-      "invoice_image": this.state.picture,
-      "purchases": this.state.pendingSubmissions
-    }
-    this.addNewData(newInvoice, `/api/v1/invoices.json`)
+    let formDataObject = new FormData()
+
+      formDataObject.append("company_id", this.state.companyId)
+      formDataObject.append("invoice_number", this.state.invoiceNumber)
+      formDataObject.append("amount", this.state.amount)
+      formDataObject.append("date", this.state.date)
+      formDataObject.append("invoice_image", this.state.picture[0])
+      formDataObject.append("purchases", JSON.stringify(this.state.pendingSubmissions))
+
+    this.addNewData(formDataObject, `/api/v1/invoices`)
     this.setState({
       pendingSubmissions: [],
-      companyId: '',
       invoiceNumber: '',
       amount: '',
       date: '',
@@ -128,7 +127,8 @@ class InvoiceFormContainer extends React.Component {
       productName: '',
       quantity: '',
       unitPrice: '',
-      totalPrice: ''
+      totalPrice: '',
+      picture: []
     })
   }
 
@@ -146,7 +146,7 @@ class InvoiceFormContainer extends React.Component {
     let dropzoneIcon = '';
 
     if (this.state.picture.length) {
-      dropzoneIcon = this.state.picture.map((file) => <img key={1} src={file.preview} />)
+      dropzoneIcon = this.state.picture.map((file) => <img className="dropzone-icon" key={1} src={file.preview} />)
     } else {
       dropzoneIcon = <p>Drag a picture of your invoice here or click to choose the file.</p>
     }
@@ -208,12 +208,14 @@ class InvoiceFormContainer extends React.Component {
                 value={this.state.date}
                 handleChange={this.handleDateChange}
               />
-              <Dropzone
-                onDrop={this.onDrop.bind(this)}
-                multiple={false}
-              >
-                {dropzoneIcon}
-              </Dropzone>
+              <div className='special-field'>
+                <Dropzone
+                  onDrop={this.onDrop.bind(this)}
+                  multiple={false}
+                >
+                  {dropzoneIcon}
+                </Dropzone>
+              </div>
               <button type='button' onClick={this.clearImage}>Remove Image</button><br />
 
               <p>Purchase Info:</p>

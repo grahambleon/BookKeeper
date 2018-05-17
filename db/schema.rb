@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 2018_05_15_175012) do
 
   create_table "invoices", force: :cascade do |t|
     t.string "invoice_number", null: false
-    t.decimal "amount", null: false
-    t.string "date_received", null: false
+    t.decimal "amount", precision: 5, scale: 2, null: false
+    t.date "date_received", null: false
     t.bigint "account_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_05_15_175012) do
     t.string "product_name", null: false
     t.string "quantity", null: false
     t.string "unit_price", null: false
-    t.decimal "total_price", null: false
+    t.decimal "total_price", precision: 5, scale: 2, null: false
     t.bigint "user_id"
     t.bigint "account_id"
     t.bigint "invoice_id"

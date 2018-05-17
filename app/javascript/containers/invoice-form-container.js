@@ -19,7 +19,7 @@ class InvoiceFormContainer extends React.Component {
       productName: '',
       quantity: '',
       unitPrice: '',
-      totalPrice: '',
+      totalPrice: ''
     }
     this.addNewData = this.addNewData.bind(this)
     this.addPurchase = this.addPurchase.bind(this)
@@ -151,22 +151,16 @@ class InvoiceFormContainer extends React.Component {
       )
     })
 
-    currentCompany = this.state.userData.find(company => company.id === this.state.companyId)
-    console.log(this.state.amount);
-
     return(
       <div>
-        <div className='rows'>
-          <div> </div>
-        </div>
-        <div className='rows'>
-          <div className='column medium-5 text-center invoice'>
+        <div className='row form'>
+          <div className='column small-8 text-center invoice'>
             <h5>Invoice number: {this.state.invoiceNumber} | Received: {this.state.date} | Amount owed: ${this.state.amount}</h5>
             <h5> Product Name | Product ID | Unit Price | Quantity | Total</h5>
             <div>{purchases}</div>
           </div>
-          <div className='column text-left medium-5'>
-            <p>New Invoice:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button></p>
+          <div className='column small-4 text-center form'>
+            <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
             <form>
               <CompanyDropdown
                 companyList={companyList}
@@ -181,21 +175,21 @@ class InvoiceFormContainer extends React.Component {
                 value={this.state.invoiceNumber}
                 handleChange={this.handleChange}
               />
-              <DateFormField
-                label='Date Received'
-                name='date'
-                value={this.state.date}
-                handleChange={this.handleDateChange}
-              />
               <InvoiceFormField
                 label='Amount Owed'
                 name='amount'
                 value={this.state.amount}
                 handleChange={this.handleChange}
               />
+              <DateFormField
+                label='Date Received'
+                name='date'
+                value={this.state.date}
+                handleChange={this.handleDateChange}
+              />
               <ImageUploader />
 
-              <h4>Enter Purchase:</h4>
+              <p>Purchase Info:</p>
               <InvoiceFormField
                 label='Product Id'
                 name='productId'

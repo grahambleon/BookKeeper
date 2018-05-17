@@ -16,7 +16,7 @@ class Api::V1::InvoicesController < ApplicationController
         account: @account,
         invoice: @invoice
       )
-
+binding.pry
     render json: @invoice, include: ['purchases']
     end
   end

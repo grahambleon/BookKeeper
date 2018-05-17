@@ -35,7 +35,12 @@ gem 'fog'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+<<<<<<< HEAD
   gem 'dotenv-rails'
+=======
+  gem 'shoulda'
+  gem "test-unit", "~> 3.2"
+>>>>>>> eea24658a5e77f78a705657f86552ac8035aec87
 end
 
 group :test do
@@ -65,4 +70,5 @@ gem 'devise'
 gem 'foundation-rails', '~> 5.0'
 gem 'webpacker', '~> 3.3'
 gem 'seed_dump'
-gem 'shoulda'
+
+# Added at 2018-05-15 19:33:12 -0400 by lolimpro:

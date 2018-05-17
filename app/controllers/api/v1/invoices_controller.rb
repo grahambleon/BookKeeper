@@ -5,7 +5,7 @@ class Api::V1::InvoicesController < ApplicationController
   def create
     binding.pry
     @account = Account.find_by(id: params["company_id"])
-    @invoice = Invoice.create!(invoice_number: params["invoice_number"], amount: params["amount"], date_received: params["date"], user: current_user, account: @account)
+    @invoice = Invoice.create!(invoice_number: params["invoice_number"], amount: params["amount"], date_received: params["date"], user: current_user, account: @account, invoice_image:)
     params["purchases"].each do |purchase|
       Purchase.create!(
         product_id: purchase["product_id"],

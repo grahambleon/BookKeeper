@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import HomePage from '../../../app/javascript/containers/home-page';
-import backendData from '../fixtures/userData.json'
+import fakeAccountIndex from '../fixtures/fakeAccountIndex.json'
 
 describe('<HomePage />', () => {
 
-  fetch.mockResponseOnce(JSON.stringify(backendData), {status: 200})
+  fetch.mockResponseOnce(JSON.stringify(fakeAccountIndex), {status: 200})
 
   const wrapper = mount(
     <HomePage />

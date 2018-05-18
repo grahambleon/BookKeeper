@@ -19,12 +19,6 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
 
       expect(returned_json.length).to eq 1
       expect(returned_json.first["company_name"]).to eq("Russo's")
-
-      expect(returned_json.first["invoices"].length).to eq 1
-      expect(returned_json.first["invoices"].first["invoice_number"]).to eq("1337")
-
-      expect(returned_json.first["invoices"].first["purchases"].length).to eq 1
-      expect(returned_json.first["invoices"].first["purchases"].first["product_name"]).to eq("Taters")
     end
   end
 end

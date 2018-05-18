@@ -1,8 +1,19 @@
 class Api::V1::InvoicesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def index
+    @invoices = Invoice.where(user_id: current_user)
+
+    render json: @invoices, each_serializer: InvoiceListSerializer
+  end
+
+  def show
+    @invoice = Invoice.where(id: params["id"])
+
+    render json: @invoice, each_serializer: InvoiceShowSerializer
+  end
+
   def create
-binding.pry
     @account = Account.find_by(id: params["company_id"])
     @invoice = Invoice.create!(invoice_number: params["invoice_number"], amount: params["amount"], date_received: params["date"], user: current_user, account: @account, invoice_image: params["invoice_image"])
     JSON.parse(params["purchases"]).each do |purchase|
@@ -17,7 +28,7 @@ binding.pry
         invoice: @invoice
       )
 
-    render json: @invoice
+    render json: @invoice, each_serializer: InvoiceListSerializer
     end
   end
 

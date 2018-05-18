@@ -14,6 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :purchases
+    end
+  end
+
   resources :accounts, only: [:index]
   resources :invoices, only: [:new]
 end

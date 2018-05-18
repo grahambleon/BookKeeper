@@ -2,6 +2,7 @@ import React from 'react';
 import InvoiceList from './invoice-list';
 import AccountTile from '../components/account-tile'
 import InvoiceFormField from '../components/invoice-form-field';
+import DyGraph from '../components/dygraph'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -135,6 +136,7 @@ class HomePage extends React.Component {
       <div>
         <div className='row'>
           <div className='columns medium-5'>
+            <DyGraph />
             <label>Select Account:</label>
             <select onChange={this.sortInvoicesByAccount}>
               <option value='0'>---</option>

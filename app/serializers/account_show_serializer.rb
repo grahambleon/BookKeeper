@@ -1,5 +1,5 @@
-class AccountSerializer < ActiveModel::Serializer
+class AccountShowSerializer < ActiveModel::Serializer
   attributes :id, :company_name
-  
+
   has_many :invoices
 end

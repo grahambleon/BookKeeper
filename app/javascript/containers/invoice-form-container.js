@@ -139,7 +139,6 @@ class InvoiceFormContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state.picture);
     let purchases = [];
     let companyList = [];
     let currentCompany = [];

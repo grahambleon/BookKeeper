@@ -8,6 +8,7 @@ const InvoiceList = (props) => {
     return (
       <div className='invoice-item' key={invoice.id}>
         <InvoiceTile
+          id={invoice.id}
           purchases={invoice.purchases}
           invoice_number={invoice.invoice_number}
           date={invoice.date_received}

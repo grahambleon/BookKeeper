@@ -174,7 +174,7 @@ class InvoiceFormContainer extends React.Component {
 
     return(
       <div>
-        <div className='row form'>
+        <div>
           <div className='column small-8 text-center invoice'>
             <h5>Invoice number: {this.state.invoiceNumber} | Received: {this.state.date} | Amount owed: ${this.state.amount}</h5>
             <h5> Product Name | Product ID | Unit Price | Quantity | Total</h5>

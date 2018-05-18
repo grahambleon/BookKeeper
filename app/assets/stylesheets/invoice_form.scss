@@ -1,10 +1,10 @@
 @import "./colors";
 
-.row.form {
+.form {
   margin: 1% auto;
 }
 
-.column.small-8.text-center.invoice {
+.invoice {
   width: fit-content;
   background-color: $black-coral;
   padding: 1.5%;
@@ -13,7 +13,7 @@
   box-shadow: -3.5px 4px 0px #163463;
 }
 
-.column.small-4.text-center.form {
+.form {
   background-color: $black-coral;
   padding: 1.5%;
   font-size: 36px;

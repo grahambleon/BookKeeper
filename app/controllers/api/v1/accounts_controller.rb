@@ -16,8 +16,7 @@ class Api::V1::AccountsController < ApplicationController
 
   def create
     @account = Account.create!(company_name: params["company_name"], user: current_user)
-    @accounts = Account.where(user_id: current_user)
 
-    render json: @accounts, each_serializer: AccountIndexSerializer
+    render json: @account, each_serializer: AccountIndexSerializer
   end
 end

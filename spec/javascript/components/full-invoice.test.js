@@ -1,16 +1,15 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import FullInvoice from '../../../app/javascript/components/full-invoice';
-import testPurchases from '../fixtures/testPurchases.json'
+import fakeFullInvoice from '../fixtures/fakeFullInvoice.json'
 
 describe('<FullInvoice />', () => {
 
+  fetch.mockResponseOnce(JSON.stringify(fakeFullInvoice), {status: 200})
+
   const wrapper = mount(
     <FullInvoice
-      purchases={testPurchases}
-      invoice_number='1337'
-      date='2/4/2017'
-      amount='200.0'
+      id='2'
     />
   )
 

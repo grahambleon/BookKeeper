@@ -7,11 +7,12 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userData: [],
-      shownAccount: [],
+      accounts: [],
+      invoices: [],
+      header: '',
       newAccountName: ''
     }
-    this.sortInvoices = this.sortInvoices.bind(this)
+    this.sortInvoicesByAccount = this.sortInvoicesByAccount.bind(this)
     this.handleAccountSubmit = this.handleAccountSubmit.bind(this)
     this.addNewData = this.addNewData.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -35,34 +36,35 @@ class HomePage extends React.Component {
     })
     .then(response => response.json())
     .then(body => {
+      window.alert(`Successfully opened account: ${body.company_name}`);
       this.setState({
-        userData: this.state.userData.concat(body)
+        accounts: this.state.accounts.concat(body)
       });
     })
     .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
   componentDidMount() {
-  fetch(`/api/v1/accounts`, {
-    credentials: 'same-origin',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-  })
-  .then(response => {
-    if (response.ok) {
-      return response;
-    } else {
-      let errorMessage = `${response.status} (${response.statusText})`,
-        error = new Error(errorMessage);
-      throw(error);
-    }
-  })
-  .then(response => response.json())
-  .then(body => {
-    this.setState({
-      userData: body
-    });
-  })
-  .catch(error => console.error (`Error in fetch: ${error.message}`));
+    fetch(`/api/v1/accounts`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        accounts: body
+      });
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
   handleAccountSubmit(event) {
@@ -78,51 +80,63 @@ class HomePage extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  sortInvoices(event){
-    let selectedAccount = this.state.userData.filter((account) => {
-      return (
-        parseInt(account.id) === parseInt(event.target.value)
-      )
+  sortInvoicesByAccount(event){
+    fetch(`/api/v1/accounts/${event.target.value}.json`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     })
-    this.setState({ shownAccount: selectedAccount })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        invoices: body[0].invoices,
+        header: body[0].company_name
+      });
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
   render() {
+    console.log(this.state);
       let page = [];
       let accountList = [];
-      let companyList = [];
-      accountList = this.state.userData.map((account) => {
+
+      accountList = this.state.accounts.map((account) => {
         return (
           <option
             key={account.id}
             value={account.id}
-            onClick={this.sortInvoices}
+            onClick={this.sortInvoicesByAccount}
           >
             {account.company_name}
           </option>
         )
     })
 
-    page = this.state.shownAccount.map((account) => {
-      return (
-        <div key={account.id}>
+    page =
+        <div>
           <AccountTile
-            name={account.company_name}
-            value={account.id}
+            name={this.state.header}
           />
           <InvoiceList
-            invoices={account.invoices}
+            invoices={this.state.invoices}
           />
         </div>
-      )
-    })
 
     return (
       <div>
         <div className='row'>
           <div className='columns medium-5'>
             <label>Select Account:</label>
-            <select onChange={this.sortInvoices}>
+            <select onChange={this.sortInvoicesByAccount}>
               <option value='0'>---</option>
               {accountList}
             </select>

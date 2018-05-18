@@ -15,8 +15,20 @@ class Api::V1::AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.create!(company_name: params["company_name"], user: current_user)
+    @account = Account.new(account_params)
+    @account.user = current_user
 
-    render json: @account, each_serializer: AccountIndexSerializer
+    if @account.save!
+      render json: @account, each_serializer: AccountIndexSerializer
+    else
+      render json: @account.errors.full_messages, status: :unprocessable_entity
+    end
   end
+
+  private
+
+  def account_params
+    params.permit(:company_name)
+  end
+
 end

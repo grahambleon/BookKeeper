@@ -14,35 +14,37 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def create
-    @account = Account.find_by(id: params["company_id"])
-    @invoice = Invoice.create!(invoice_number: params["invoice_number"], amount: params["amount"], date_received: params["date"], user: current_user, account: @account, invoice_image: params["invoice_image"])
-    JSON.parse(params["purchases"]).each do |purchase|
-      Purchase.create!(
-        product_id: purchase["product_id"],
-        product_name: purchase["product_name"],
-        quantity: purchase["quantity"],
-        unit_price: purchase["unit_price"],
-        total_price: purchase["total_price"],
-        user: current_user,
-        account: @account,
-        invoice: @invoice
-      )
 
-    render json: @invoice, each_serializer: InvoiceListSerializer
+    @invoice = Invoice.new(invoice_params)
+    @invoice.user = current_user
+
+    if @invoice.save!
+      JSON.parse(params["purchases"]).each do |purchase|
+        binding.pry
+        Purchase.create!(purchase_params(purchase, @invoice))
+      end
+      render json: @invoice, each_serializer: InvoiceListSerializer
+    else
+      render json: @invoice.errors.full_messages, status: :unprocessable_entity
     end
   end
 
-  # private
-  #
-  # def invoice_params
-  #   params.require(:invoice).permit(:invoice_number, :company_id, :amount, :date, :invoice_image)
-  # end
-  #
-  # def account_params
-  #   params.permit(:company_id)
-  # end
-  #
-  # def purchase_params
-  #   params.permit(:product_id, :product_name, :quantity, :unit_price, :total_price)
-  # end
+  private
+
+  def invoice_params
+    params.permit(:invoice_number, :amount, :date_received, :invoice_image, :account_id)
+  end
+
+  def purchase_params(purchase, invoice)
+    {
+      product_id: purchase["product_id"],
+      product_name: purchase["product_name"],
+      quantity: purchase["quantity"],
+      unit_price: purchase["unit_price"],
+      total_price: purchase["total_price"],
+      user: current_user,
+      account_id: params["account_id"],
+      invoice: invoice
+    }
+  end
 end

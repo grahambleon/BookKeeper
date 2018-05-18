@@ -47,6 +47,7 @@ class InvoiceFormContainer extends React.Component {
     })
     .then(response => response.json())
     .then(body => {
+      debugger;
       window.alert(`Successfully submitted invoice #${body.invoice_number}`);
     })
     .catch(error => console.error (`Error in fetch: ${error.message}`));
@@ -110,10 +111,10 @@ class InvoiceFormContainer extends React.Component {
     event.preventDefault()
     let formDataObject = new FormData()
 
-      formDataObject.append("company_id", this.state.companyId)
+      formDataObject.append("account_id", this.state.companyId)
       formDataObject.append("invoice_number", this.state.invoiceNumber)
       formDataObject.append("amount", this.state.amount)
-      formDataObject.append("date", this.state.date)
+      formDataObject.append("date_received", this.state.date)
       formDataObject.append("invoice_image", this.state.picture[0])
       formDataObject.append("purchases", JSON.stringify(this.state.pendingSubmissions))
 

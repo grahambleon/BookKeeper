@@ -8,6 +8,8 @@ body::after {
   content: "";
   background-image: url('images/background.jpeg');
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   opacity: 0.05;
   top: 0;
   left: 0;
@@ -15,6 +17,10 @@ body::after {
   right: 0;
   position: absolute;
   z-index: -1;
+}
+
+.row {
+  max-width: 95%;
 }
 
 .top-bar-section li:not(.has-form) a:not(.button), #bookkeeper {
@@ -54,9 +60,8 @@ li.name {
 
 .column.medium-6.medium-centered.text-center.invoice {
   position: static;
-  max-width: 50%;
+  padding: 25px;
   background-color: $sonic-silver;
-  padding: 3rem;
   font-size: 36px;
   color: $dark-sienna;
 }

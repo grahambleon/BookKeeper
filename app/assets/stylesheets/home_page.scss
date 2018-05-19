@@ -1,23 +1,28 @@
 @import "./colors";
 
-.rows {
-  margin: auto 10%;
-}
-
-.columns.medium-5.text-center.invoice {
+.invoice {
   background-color: $black-coral;
   padding: 3rem;
-  font-size: 36px;
+  font-size: 24px;
   color: $dark-sienna;
 }
 
-.columns.medium-5.text-center.list {
+.columns.medium-4.options-panel {
+  background-color: #75777F;
+  padding: 2%;
+  margin: 3.5%;
+  width: 20%;
+  border: 1px solid #b5bacc;
+}
+
+.list {
   padding: 3rem;
   font-size: 36px;
   color: $dark-sienna;
 }
 
 .invoice-item {
+  font-size: 22px;
   background-color: $black-coral;
   padding: 2%;
   border-bottom: solid black;
@@ -30,6 +35,25 @@
   padding: 2%;
   border-bottom: solid black;
   background-color: $dark-sienna;
+}
+
+.invoice-header {
+  border-bottom: 1px solid black;
+  padding: 2.5%;
+  margin: -2.5%;
+  background-color: #b5bacc;
+}
+
+.purchase-list-header {
+  margin-top: 5%;
+  padding-bottom: 6px;
+  border-bottom: 1px solid black;
+}
+
+.purchase-list {
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-right: 9%;
 }
 
 label, em {

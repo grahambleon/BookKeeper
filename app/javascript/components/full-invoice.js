@@ -33,7 +33,7 @@ class FullInvoice extends React.Component {
         id: body[0].id,
         invoiceNumber: body[0].invoice_number,
         amount: body[0].amount,
-        date: body[0].date,
+        date: body[0].date_received,
         purchases: body[0].purchases
       });
     })
@@ -60,9 +60,13 @@ class FullInvoice extends React.Component {
       <div className="text-center">
         <div className="overlay">
           <div className="column medium-6 medium-centered text-center invoice">
-            <div>Invoice number: {this.state.invoiceNumber} Received: {this.state.date} Amount owed: {this.state.amount}</div>
-              <h5> Product Name | Product ID | Unit Price | Quantity | Total</h5>
-            <ul>{allPurchases}</ul>
+            <div className="invoice-header">
+              <div>Invoice number: {this.state.invoiceNumber}</div>
+              <div>Received: {this.state.date}</div>
+              <div>Amount owed: ${this.state.amount}</div>
+            </div>
+            <h5 className="purchase-list-header"> Product Name | Product ID | Unit Price | Quantity | Total</h5>
+            <ul className="purchase-list">{allPurchases}</ul>
           </div>
         </div>
       </div>

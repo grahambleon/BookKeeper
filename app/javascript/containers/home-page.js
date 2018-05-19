@@ -143,7 +143,7 @@ class HomePage extends React.Component {
               <option value='0'>---</option>
               {accountList}
             </select>
-            <button class>Visualize</button>
+            <button>Visualize</button>
             <form onSubmit={this.handleAccountSubmit}>
               <InvoiceFormField
                 label='Open New Account:'

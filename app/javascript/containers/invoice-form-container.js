@@ -60,7 +60,8 @@ class InvoiceFormContainer extends React.Component {
       product_name: this.state.productName,
       quantity: this.state.quantity,
       unit_price: this.state.unitPrice,
-      total_price: this.state.totalPrice
+      total_price: this.state.totalPrice,
+      key: this.state.pendingSubmissions.length
     }
     this.setState ({
       productId: '',
@@ -154,7 +155,7 @@ class InvoiceFormContainer extends React.Component {
     purchases = this.state.pendingSubmissions.map((purchase) => {
       return(
         <Purchase
-          key={purchase.product_id}
+          key={purchase.key}
           product_id={purchase.product_id}
           product_name={purchase.product_name}
           unit_price={purchase.unit_price}

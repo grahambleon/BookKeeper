@@ -1,17 +1,21 @@
 @import "./colors";
 
-#sign-in-form {
+.row.column.text-center {
+  margin-left: 36%;
+  margin-top: 6%;
+  max-width: 30%;
   background-color: $black-coral;
   padding: 3rem;
   font-size: 36px;
   color: $dark-sienna;
 }
 
-#links {
-  font-size: 1.4vw;
+.line {
+    border: 1.5px solid $dark-sienna;
+    margin-top: 12%;
+    margin-bottom: 12%;
 }
-.column.medium-12.text-center {
-  margin: 5% auto;
-  font-size: 8vw;
-  color: $dark-sienna;
+
+.actions {
+  font-size: 24px;
 }

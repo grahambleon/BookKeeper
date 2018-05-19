@@ -137,15 +137,16 @@ class HomePage extends React.Component {
           <div className='columns medium-8 text-center list'>
             <div>{page}</div>
           </div>
-          <div className='columns medium-4'>
+          <div className='columns medium-4 options-panel'>
             <label>Select Account:</label>
             <select onChange={this.sortInvoicesByAccount}>
               <option value='0'>---</option>
               {accountList}
             </select>
+            <button class>Visualize</button>
             <form onSubmit={this.handleAccountSubmit}>
               <InvoiceFormField
-                label='Create New Account:'
+                label='Open New Account:'
                 name='newAccountName'
                 value={this.state.newAccountName}
                 handleChange={this.handleChange}

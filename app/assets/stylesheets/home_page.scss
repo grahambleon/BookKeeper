@@ -7,6 +7,14 @@
   color: $dark-sienna;
 }
 
+.columns.medium-4.options-panel {
+  background-color: #75777F;
+  padding: 2%;
+  margin: 3.5%;
+  width: 20%;
+  border: 1px solid #b5bacc;
+}
+
 .list {
   padding: 3rem;
   font-size: 36px;
@@ -30,6 +38,9 @@
 }
 
 .invoice-header {
+  border-bottom: 1px solid black;
+  padding: 2.5%;
+  margin: -2.5%;
   background-color: #b5bacc;
 }
 
@@ -40,8 +51,9 @@
 }
 
 .purchase-list {
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-right: 9%;
 }
 
 label, em {

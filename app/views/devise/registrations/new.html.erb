@@ -1,10 +1,10 @@
-<div class="row greeting-page">
-  <div class="columns small-8 text-center greeting">
-    <div class="secondary">Welcome to Bookkeeper!</div>
-    <div class="secondary">Make an account or <%= link_to 'sign in', new_user_session_path %> to get started.</div>
+<div class="row">
+  <div class="columns medium-8 text-center">
+    <div class="greeting-top">Welcome to Bookkeeper!</div>
+    <div class="greeting-bottom">Make an account or <%= link_to 'sign in', new_user_session_path %> to get started.</div>
   </div>
 
-  <div class="columns small-4 text-center signup">
+  <div class="columns medium-4 text-center">
     <h2 class="banner">Sign up</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>

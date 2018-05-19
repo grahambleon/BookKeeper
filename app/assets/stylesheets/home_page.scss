@@ -29,9 +29,13 @@
   color: $dark-sienna;
 }
 
+.invoice-item:hover {
+  background-color: #c19c74c7;
+}
+
 .account-tile {
   font-size: xx-large;
-  color: $black-coral;
+  color: #aa9b81;
   padding: 2%;
   border-bottom: solid black;
   background-color: $dark-sienna;

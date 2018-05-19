@@ -1,9 +1,5 @@
 @import "./colors";
 
-.form {
-  margin: 1% auto;
-}
-
 .invoice {
   width: fit-content;
   background-color: $black-coral;
@@ -13,12 +9,26 @@
   box-shadow: -3.5px 4px 0px #163463;
 }
 
-.form {
+.column.medium-3.text-center.form {
+  max-width: 22%;
+  margin: 1% auto;
   background-color: $black-coral;
-  padding: 1.5%;
+  padding: 0.5%;
   font-size: 36px;
   color: $dark-sienna;
   box-shadow: -3.5px 4px 0px #163463;
+}
+
+.column.medium-3.text-center.form {
+  
+}
+
+.column.medium-6.text-center.demo-invoice {
+  margin: 2%;
+  padding: 25px;
+  background-color: $sonic-silver;
+  font-size: 36px;
+  color: $dark-sienna;
 }
 
 .dropzone-icon {

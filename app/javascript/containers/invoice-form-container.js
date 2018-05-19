@@ -173,85 +173,85 @@ class InvoiceFormContainer extends React.Component {
     })
 
     return(
-      <div>
-        <div>
-          <div className='column small-8 text-center invoice'>
-            <h5>Invoice number: {this.state.invoiceNumber} | Received: {this.state.date} | Amount owed: ${this.state.amount}</h5>
-            <h5> Product Name | Product ID | Unit Price | Quantity | Total</h5>
-            <div>{purchases}</div>
+      <div className='row form-page'>
+        <div className="column medium-6 text-center demo-invoice">
+          <div className="invoice-header">
+            <div>Invoice number: {this.state.invoiceNumber}</div>
+            <div>Received: {this.state.date}</div>
+            <div>Amount owed: ${this.state.amount}</div>
           </div>
-          <div className='column small-4 text-center form'>
-            <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
-            <form>
-              <CompanyDropdown
-                companyList={companyList}
-                label='Account'
-                name='companyId'
-                value={this.state.companyId}
-                handleChange={this.handleChange}
-              />
-              <InvoiceFormField
-                label='Invoice Number'
-                name='invoiceNumber'
-                value={this.state.invoiceNumber}
-                handleChange={this.handleChange}
-              />
-              <InvoiceFormField
-                label='Amount Owed'
-                name='amount'
-                value={this.state.amount}
-                handleChange={this.handleChange}
-              />
-              <DateFormField
-                label='Date Received'
-                name='date'
-                value={this.state.date}
-                handleChange={this.handleDateChange}
-              />
-              <div className='special-field'>
-                <Dropzone
-                  onDrop={this.onDrop.bind(this)}
-                  multiple={false}
-                >
-                  {dropzoneIcon}
-                </Dropzone>
-              </div>
-              <button type='button' onClick={this.clearImage}>Remove Image</button><br />
-
-              <p>Purchase Info:</p>
-              <InvoiceFormField
-                label='Product Id'
-                name='productId'
-                value={this.state.productId}
-                handleChange={this.handleChange}
-              />
-              <InvoiceFormField
-                label='Product Name'
-                name='productName'
-                value={this.state.productName}
-                handleChange={this.handleChange}
-              />
-              <InvoiceFormField
-                label='Quantity'
-                name='quantity'
-                value={this.state.quantity}
-                handleChange={this.handleChange}
-              />
-              <InvoiceFormField
-                label='Unit Price'
-                name='unitPrice'
-                value={this.state.unitPrice}
-                handleChange={this.handleChange}
-              />
-              <InvoiceFormField
-                label='Total Price'
-                name='totalPrice'
-                value={this.state.totalPrice}
-                handleChange={this.handleChange}
-              />
-              <button className="button" type="button" onClick={this.addPurchase}>Save Purchase</button>
-            </form>
+          <h5 className="purchase-list-header"> Product Name | Product ID | Unit Price | Quantity | Total</h5>
+          <ul className="purchase-list">{purchases}</ul>
+        </div>
+        <div className='column medium-3 text-center form'>
+          <CompanyDropdown
+            companyList={companyList}
+            label='Account'
+            name='companyId'
+            value={this.state.companyId}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Invoice Number'
+            name='invoiceNumber'
+            value={this.state.invoiceNumber}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Amount Owed'
+            name='amount'
+            value={this.state.amount}
+            handleChange={this.handleChange}
+          />
+          <DateFormField
+            label='Date Received'
+            name='date'
+            value={this.state.date}
+            handleChange={this.handleDateChange}
+          />
+        </div>
+        <div className='column medium-3 text-center form purchases'>
+          <p>Purchase Info:</p>
+          <InvoiceFormField
+            label='Product Id'
+            name='productId'
+            value={this.state.productId}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Product Name'
+            name='productName'
+            value={this.state.productName}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Quantity'
+            name='quantity'
+            value={this.state.quantity}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Unit Price'
+            name='unitPrice'
+            value={this.state.unitPrice}
+            handleChange={this.handleChange}
+          />
+          <InvoiceFormField
+            label='Total Price'
+            name='totalPrice'
+            value={this.state.totalPrice}
+            handleChange={this.handleChange}
+          />
+          <button className="button" type="button" onClick={this.addPurchase}>Save Purchase</button>
+          <div className='special-field'>
+            <Dropzone
+              onDrop={this.onDrop.bind(this)}
+              multiple={false}
+            >
+              {dropzoneIcon}
+            </Dropzone>
           </div>
+          <button type='button' onClick={this.clearImage}>Remove Image</button><br />
         </div>
       </div>
     )

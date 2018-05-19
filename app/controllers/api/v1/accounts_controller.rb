@@ -25,6 +25,12 @@ class Api::V1::AccountsController < ApplicationController
     end
   end
 
+  def graph
+    @accounts = Account.where(user_id: current_user)
+
+    render json: @accounts, each_serializer: AccountGraphSerializer
+  end
+
   private
 
   def account_params

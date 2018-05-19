@@ -2,7 +2,7 @@ import React from 'react';
 import InvoiceList from './invoice-list';
 import AccountTile from '../components/account-tile'
 import InvoiceFormField from '../components/invoice-form-field';
-import DyGraph from '../components/dygraph'
+import Graph from './graph'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -143,7 +143,7 @@ class HomePage extends React.Component {
               <option value='0'>---</option>
               {accountList}
             </select>
-            <button>Visualize</button>
+            <Graph />
             <form onSubmit={this.handleAccountSubmit}>
               <InvoiceFormField
                 label='Open New Account:'

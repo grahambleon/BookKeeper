@@ -19,10 +19,6 @@
   box-shadow: -3.5px 4px 0px #163463;
 }
 
-.column.medium-3.text-center.form {
-  
-}
-
 .column.medium-6.text-center.demo-invoice {
   margin: 2%;
   padding: 25px;
@@ -40,6 +36,14 @@
   padding-left: 15%;
   margin: auto;
   padding: auto;
+}
+
+.column.medium-3.text-center {
+  margin-top: 5%;
+}
+
+.column.medium-9.text-left {
+  border-left: 1px solid black;
 }
 
 td:hover {

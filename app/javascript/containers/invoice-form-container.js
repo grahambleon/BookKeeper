@@ -176,9 +176,16 @@ class InvoiceFormContainer extends React.Component {
       <div className='row form-page'>
         <div className="column medium-6 text-center demo-invoice">
           <div className="invoice-header">
-            <div>Invoice number: {this.state.invoiceNumber}</div>
-            <div>Received: {this.state.date}</div>
-            <div>Amount owed: ${this.state.amount}</div>
+            <div className='row'>
+              <div className='column medium-3 text-center'>
+                <button className="button" type="button" onClick={this.handleInvoiceSubmit}>Submit Invoice</button>
+              </div>
+              <div className='column medium-9 text-left'>
+                <div>Invoice number: {this.state.invoiceNumber}</div>
+                <div>Amount owed: ${this.state.amount}</div>
+                <div>Received: {this.state.date}</div>
+              </div>
+            </div>
           </div>
           <h5 className="purchase-list-header"> Product Name | Product ID | Unit Price | Quantity | Total</h5>
           <ul className="purchase-list">{purchases}</ul>
@@ -210,7 +217,7 @@ class InvoiceFormContainer extends React.Component {
             handleChange={this.handleDateChange}
           />
         </div>
-        <div className='column medium-3 text-center form purchases'>
+        <div className='column medium-3 text-center form'>
           <p>Purchase Info:</p>
           <InvoiceFormField
             label='Product Id'

@@ -49,9 +49,15 @@ class DyGraph extends Component {
 
   render() {
     let data;
-    data = 'Date, Account, Amount\n'
-    this.state.data.forEach((invoice) => {
-      data += `${invoice.date_received}, ${invoice.account.company_name}, ${invoice.amount}\n`
+    data = 'Date'
+    this.state.data.forEach((account) => {
+      data += `, ${account.company_name}`
+    })
+    data += '\n'
+    this.state.data.forEach((account) => {
+      account.invoices.forEach((invoice) => {
+        data += `${invoice.date_received}, \n`
+      })
     })
 
     console.log(data);

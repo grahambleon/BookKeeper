@@ -104,7 +104,7 @@ class InvoiceFormContainer extends React.Component {
   }
 
   handleDateChange(date) {
-    this.setState({ date: date.format('MM/DD/YYYY')})
+    this.setState({ date: date.format('MM-DD-YYYY')})
   }
 
   handleInvoiceSubmit(event) {

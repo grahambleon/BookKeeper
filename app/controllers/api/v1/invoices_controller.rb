@@ -17,16 +17,20 @@ class Api::V1::InvoicesController < ApplicationController
 
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
-binding.pry
     if @invoice.save!
       JSON.parse(params["purchases"]).each do |purchase|
-        binding.pry
         Purchase.create!(purchase_params(purchase, @invoice))
       end
       render json: @invoice, each_serializer: InvoiceListSerializer
     else
       render json: @invoice.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def date
+    @invoice = Invoice.where(date_received: params["date"])
+
+    render json: @invoice, each_serializer: InvoiceShowSerializer
   end
 
   private

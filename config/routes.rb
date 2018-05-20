@@ -16,6 +16,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get "dates/:date", to: "invoices#date"
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
       resources :invoices
     end
   end

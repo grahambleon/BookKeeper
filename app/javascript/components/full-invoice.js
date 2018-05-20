@@ -9,7 +9,8 @@ class FullInvoice extends React.Component {
       invoiceNumber: '',
       date: '',
       amount: '',
-      purchases: []
+      purchases: [],
+      account: ''
     }
   }
 
@@ -34,7 +35,8 @@ class FullInvoice extends React.Component {
         invoiceNumber: body[0].invoice_number,
         amount: body[0].amount,
         date: body[0].date_received,
-        purchases: body[0].purchases
+        purchases: body[0].purchases,
+        account: body[0].account.company_name
       });
     })
     .catch(error => console.error (`Error in fetch: ${error.message}`));
@@ -61,6 +63,7 @@ class FullInvoice extends React.Component {
         <div className="overlay">
           <div className="column medium-6 medium-centered text-center invoice">
             <div className="invoice-header">
+              <div>{this.state.account}</div>
               <div>Invoice number: {this.state.invoiceNumber}</div>
               <div>Received: {this.state.date}</div>
               <div>Amount owed: ${this.state.amount}</div>

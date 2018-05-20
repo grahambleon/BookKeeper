@@ -2,6 +2,7 @@ import React from 'react';
 import InvoiceList from './invoice-list';
 import AccountTile from '../components/account-tile'
 import InvoiceFormField from '../components/invoice-form-field';
+import DateFormField from '../components/date-form-field'
 import Graph from './graph'
 
 class HomePage extends React.Component {
@@ -17,6 +18,7 @@ class HomePage extends React.Component {
     this.handleAccountSubmit = this.handleAccountSubmit.bind(this)
     this.addNewData = this.addNewData.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
 
   addNewData(payload, url) {
@@ -81,6 +83,30 @@ class HomePage extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  handleDateChange(date) {
+    fetch(`/api/v1/dates/${date.format('MM-DD-YYYY')}.json`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        invoices: body,
+        header: body[0].date_received
+      });
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
+  }
+
   sortInvoicesByAccount(event){
     fetch(`/api/v1/accounts/${event.target.value}.json`, {
       credentials: 'same-origin',
@@ -106,6 +132,7 @@ class HomePage extends React.Component {
   }
 
   render() {
+    console.log(this.state);
       let page = [];
       let accountList = [];
 
@@ -138,11 +165,15 @@ class HomePage extends React.Component {
             <div>{page}</div>
           </div>
           <div className='columns medium-4 options-panel'>
-            <label>Select Account:</label>
+            <label>Select by account:</label>
             <select onChange={this.sortInvoicesByAccount}>
               <option value='0'>---</option>
               {accountList}
             </select>
+            <DateFormField
+              label='Select by date:'
+              handleChange={this.handleDateChange}
+            />
             <Graph accounts={accountList}/>
             <form onSubmit={this.handleAccountSubmit}>
               <InvoiceFormField

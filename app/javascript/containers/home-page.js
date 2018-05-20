@@ -2,6 +2,7 @@ import React from 'react';
 import InvoiceList from './invoice-list';
 import AccountTile from '../components/account-tile'
 import InvoiceFormField from '../components/invoice-form-field';
+import DateFormField from '../components/date-form-field'
 import Graph from './graph'
 
 class HomePage extends React.Component {
@@ -17,6 +18,7 @@ class HomePage extends React.Component {
     this.handleAccountSubmit = this.handleAccountSubmit.bind(this)
     this.addNewData = this.addNewData.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
 
   addNewData(payload, url) {
@@ -81,6 +83,10 @@ class HomePage extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  handleDateChange(date) {
+    this.setState({ date: date.format('L')})
+  }
+
   sortInvoicesByAccount(event){
     fetch(`/api/v1/accounts/${event.target.value}.json`, {
       credentials: 'same-origin',
@@ -138,11 +144,15 @@ class HomePage extends React.Component {
             <div>{page}</div>
           </div>
           <div className='columns medium-4 options-panel'>
-            <label>Select Account:</label>
+            <label>Select by account:</label>
             <select onChange={this.sortInvoicesByAccount}>
               <option value='0'>---</option>
               {accountList}
             </select>
+            <DateFormField
+              label='Select by date:'
+              handleChange={this.handleDateChange}
+            />
             <Graph accounts={accountList}/>
             <form onSubmit={this.handleAccountSubmit}>
               <InvoiceFormField

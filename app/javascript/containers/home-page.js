@@ -84,7 +84,27 @@ class HomePage extends React.Component {
   }
 
   handleDateChange(date) {
-    this.setState({ date: date.format('L')})
+    fetch(`/api/v1/dates/${date.format('MM-DD-YYYY')}.json`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        invoices: body,
+        header: body[0].date_received
+      });
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
   sortInvoicesByAccount(event){
@@ -112,6 +132,7 @@ class HomePage extends React.Component {
   }
 
   render() {
+    console.log(this.state);
       let page = [];
       let accountList = [];
 

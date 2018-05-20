@@ -5,23 +5,64 @@ import 'dygraphs/dist/dygraph.css'
 
 class DyGraph extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      data: []
+    }
   }
 
   componentDidMount() {
-    let data = this.props.data;
 
-    new Dygraph(graphContainer, data, {
-      legend: 'always',
-      title: 'Graph'
-    });
+
+    fetch(`/api/v1/graph`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        data: body
+      })
+    })
+    // .then(
+    //
+    //   // new Dygraph(graphContainer, data, {
+    //   //   legend: 'always',
+    //   //   title: 'Graph'
+    //   // })
+    // )
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
+
+
+
+
   render() {
+    let data;
+    data = 'Date, Account, Amount\n'
+    this.state.data.forEach((invoice) => {
+      data += `${invoice.date_received}, ${invoice.account.company_name}, ${invoice.amount}\n`
+    })
+
+    console.log(data);
     return(
-      <div className='overlay'>
-        <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
-        <div id='graphContainer'></div>
+      <div className="text-center">
+        <div className="overlay">
+          <div className="column medium-6 medium-centered text-center graph">
+            <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
+            <div id='graphContainer'></div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -12,7 +12,9 @@ class Graph extends React.Component {
   }
 
   showGraph() {
-    this.setState ({ selected: true })
+    if (this.state.selected == false) {
+      this.setState ({ selected: true })
+    }
   }
 
   hideGraph() {
@@ -39,7 +41,9 @@ class Graph extends React.Component {
     return (
       <div onClick={this.showGraph}>
         <div>Visualize</div>
-        {overlay}
+        <div>
+          {overlay}
+        </div>
       </div>
     )
   }

@@ -10,6 +10,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get "/graph/:id", to: "accounts#graph"
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
       resources :invoices
     end
   end

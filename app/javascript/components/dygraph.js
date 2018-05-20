@@ -1,46 +1,67 @@
 import React, { Component } from 'react';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.css'
-// import './graphComponent.css';
 
 class DyGraph extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      account: '',
+      invoices: []
+    }
+    this.fetchGraphData = this.fetchGraphData.bind(this)
+    this.renderGraph = this.renderGraph.bind(this)
   }
 
-  componentDidMount() {
+  fetchGraphData(event) {
+    fetch(`/api/v1/graph/${event.target.value}`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        account: body[0].company_name,
+        invoices: body[0].invoices
+      })
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`))
+  }
+
+  renderGraph() {
     let data;
-
-    data = 'Data, Point\n'
-    data += '1, 1\n'
-    data += '2, 2\n'
-    data += '3, 3\n'
-    data += '4, 4\n'
-    data += '5, 5\n'
-    data += '6, 6\n'
-    data += '7, 7\n'
-    data += '8, 8\n'
-    data += '9, 9\n'
-    data += '10, 1\n'
-    data += '11, 1\n'
-    data += '12, 2\n'
-    data += '13, 3\n'
-    data += '14, 4\n'
-    data += '15, 5\n'
-    data += '16, 6\n'
-    data += '17, 7\n'
-    data += '18, 8\n'
-    data += '19, 9\n'
-
+    data = 'Date, $\n'
+    this.state.invoices.forEach((invoice) => {
+        data += `${invoice.date_received}, ${invoice.amount}\n`
+    }),
     new Dygraph(graphContainer, data, {
-      legend: 'always',
-      title: 'Graph'
-    });
+      title: `${this.state.account}`
+    })
   }
 
   render() {
     return(
-      <div id='graphContainer'></div>
+      <div className="overlay">
+        <div className="column medium-6 medium-centered text-center graph">
+          <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
+          <label>Select Account:</label>
+          <select onChange={this.fetchGraphData}>
+            <option value='0'>---</option>
+            {this.props.accounts}
+          </select>
+          <button onClick={this.renderGraph}>VISUALIZE!!!! =D</button>
+          <div id='graphContainer'></div>
+        </div>
+      </div>
     )
   }
 }

@@ -115,7 +115,7 @@ class HomePage extends React.Component {
             key={account.id}
             value={account.id}
             onClick={this.sortInvoicesByAccount}
-          >
+            >
             {account.company_name}
           </option>
         )
@@ -143,7 +143,7 @@ class HomePage extends React.Component {
               <option value='0'>---</option>
               {accountList}
             </select>
-            <Graph />
+            <Graph accounts={accountList}/>
             <form onSubmit={this.handleAccountSubmit}>
               <InvoiceFormField
                 label='Open New Account:'

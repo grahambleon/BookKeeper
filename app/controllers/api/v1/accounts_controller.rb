@@ -26,9 +26,9 @@ class Api::V1::AccountsController < ApplicationController
   end
 
   def graph
-    @accounts = Account.where(user_id: current_user)
+    @account = Account.where(id: params["id"])
 
-    render json: @accounts, each_serializer: AccountGraphSerializer
+    render json: @account, each_serializer: AccountGraphSerializer
   end
 
   private

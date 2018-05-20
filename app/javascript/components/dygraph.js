@@ -7,14 +7,16 @@ class DyGraph extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: []
+      account: '',
+      invoices: []
     }
+    this.createGraphByAccount = this.createGraphByAccount.bind(this)
   }
 
-  componentDidMount() {
-
-
-    fetch(`/api/v1/graph`, {
+  createGraphByAccount(event){
+    let data;
+    data = 'Date, '
+    fetch(`/api/v1/graph/${event.target.value}`, {
       credentials: 'same-origin',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     })
@@ -30,42 +32,40 @@ class DyGraph extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        data: body
+        account: body[0].company_name,
+        invoices: body[0].invoices
       })
     })
-    // .then(
-    //
-    //   // new Dygraph(graphContainer, data, {
-    //   //   legend: 'always',
-    //   //   title: 'Graph'
-    //   // })
-    // )
-    .catch(error => console.error (`Error in fetch: ${error.message}`));
+    .then(data += `${this.state.account}\n`)
+    .then(
+      this.state.invoices.forEach((invoice) => {
+        data += `${invoice.date_received}, ${invoice.amount}\n`
+      }),
+      console.log(data)
+    )
+    .then(
+      new Dygraph(graphContainer, data, {
+        legend: 'always',
+        title: `${this.state.account}`
+      })
+    )
+    .catch(error => console.error (`Error in fetch: ${error.message}`))
   }
 
 
-
-
-
   render() {
-    let data;
-    data = 'Date'
-    this.state.data.forEach((account) => {
-      data += `, ${account.company_name}`
-    })
-    data += '\n'
-    this.state.data.forEach((account) => {
-      account.invoices.forEach((invoice) => {
-        data += `${invoice.date_received}, \n`
-      })
-    })
+    console.log(this.state);
 
-    console.log(data);
     return(
       <div className="text-center">
         <div className="overlay">
           <div className="column medium-6 medium-centered text-center graph">
             <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
+            <label>Select Account:</label>
+            <select onChange={this.createGraphByAccount}>
+              <option value='0'>---</option>
+              {this.props.accounts}
+            </select>
             <div id='graphContainer'></div>
           </div>
         </div>

@@ -33,7 +33,7 @@ class Graph extends React.Component {
   render() {
     let overlay;
     if(this.state.selected == true) {
-      overlay = <DyGraph hideGraph={this.hideGraph} />
+      overlay = <DyGraph hideGraph={this.hideGraph} accounts={this.props.accounts}/>
     }else if (this.state.selected == false) {
       overlay = <div></div>
     }

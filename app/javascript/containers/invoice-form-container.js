@@ -47,7 +47,6 @@ class InvoiceFormContainer extends React.Component {
     })
     .then(response => response.json())
     .then(body => {
-      debugger;
       window.alert(`Successfully submitted invoice #${body.invoice_number}`);
     })
     .catch(error => console.error (`Error in fetch: ${error.message}`));
@@ -105,7 +104,7 @@ class InvoiceFormContainer extends React.Component {
   }
 
   handleDateChange(date) {
-    this.setState({ date: date.format('L')})
+    this.setState({ date: date.format('MM/DD/YYYY')})
   }
 
   handleInvoiceSubmit(event) {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.css'
-// import './graphComponent.css';
 
 class DyGraph extends Component {
   constructor(props) {
@@ -10,12 +9,11 @@ class DyGraph extends Component {
       account: '',
       invoices: []
     }
-    this.createGraphByAccount = this.createGraphByAccount.bind(this)
+    this.fetchGraphData = this.fetchGraphData.bind(this)
+    this.renderGraph = this.renderGraph.bind(this)
   }
 
-  createGraphByAccount(event){
-    let data;
-    data = 'Date, '
+  fetchGraphData(event) {
     fetch(`/api/v1/graph/${event.target.value}`, {
       credentials: 'same-origin',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
@@ -36,38 +34,32 @@ class DyGraph extends Component {
         invoices: body[0].invoices
       })
     })
-    .then(data += `${this.state.account}\n`)
-    .then(
-      this.state.invoices.forEach((invoice) => {
-        data += `${invoice.date_received}, ${invoice.amount}\n`
-      }),
-      console.log(data)
-    )
-    .then(
-      new Dygraph(graphContainer, data, {
-        legend: 'always',
-        title: `${this.state.account}`
-      })
-    )
     .catch(error => console.error (`Error in fetch: ${error.message}`))
   }
 
+  renderGraph() {
+    let data;
+    data = 'Date, $\n'
+    this.state.invoices.forEach((invoice) => {
+        data += `${invoice.date_received}, ${invoice.amount}\n`
+    }),
+    new Dygraph(graphContainer, data, {
+      title: `${this.state.account}`
+    })
+  }
 
   render() {
-    console.log(this.state);
-
     return(
-      <div className="text-center">
-        <div className="overlay">
-          <div className="column medium-6 medium-centered text-center graph">
-            <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
-            <label>Select Account:</label>
-            <select onChange={this.createGraphByAccount}>
-              <option value='0'>---</option>
-              {this.props.accounts}
-            </select>
-            <div id='graphContainer'></div>
-          </div>
+      <div className="overlay">
+        <div className="column medium-6 medium-centered text-center graph">
+          <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
+          <label>Select Account:</label>
+          <select onChange={this.fetchGraphData}>
+            <option value='0'>---</option>
+            {this.props.accounts}
+          </select>
+          <button onClick={this.renderGraph}>VISUALIZE!!!! =D</button>
+          <div id='graphContainer'></div>
         </div>
       </div>
     )

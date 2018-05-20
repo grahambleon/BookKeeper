@@ -17,7 +17,7 @@ class Api::V1::InvoicesController < ApplicationController
 
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
-
+binding.pry
     if @invoice.save!
       JSON.parse(params["purchases"]).each do |purchase|
         binding.pry

@@ -22,6 +22,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get "invoice_number/:invoice_number", to: "invoices#invoice_number"
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
       resources :invoices
     end
   end

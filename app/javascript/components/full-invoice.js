@@ -45,6 +45,8 @@ class FullInvoice extends React.Component {
 
   render() {
     let allPurchases;
+    let amount = Number(this.state.amount).toFixed(2)
+
     allPurchases = this.state.purchases.map((purchase) => {
       return(
         <Purchase
@@ -66,7 +68,7 @@ class FullInvoice extends React.Component {
               <div>{this.state.account}</div>
               <div>Invoice number: {this.state.invoiceNumber}</div>
               <div>Received: {this.state.date}</div>
-              <div>Amount owed: ${this.state.amount}</div>
+              <div>Amount owed: ${amount}</div>
             </div>
             <h5 className="purchase-list-header"> Product Name | Product ID | Unit Price | Quantity | Total</h5>
             <ul className="purchase-list">{allPurchases}</ul>

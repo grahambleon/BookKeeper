@@ -33,6 +33,12 @@ class Api::V1::InvoicesController < ApplicationController
     render json: @invoice, each_serializer: InvoiceShowSerializer
   end
 
+  def invoice_number
+    @invoice = Invoice.where(invoice_number: params["invoice_number"])
+
+    render json: @invoice, each_serializer: InvoiceShowSerializer
+  end
+
   private
 
   def invoice_params

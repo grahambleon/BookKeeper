@@ -27,10 +27,10 @@ class InvoiceTile extends React.Component {
         id={this.props.id}
       />
     }
-
+    let amount = Number(this.props.amount).toFixed(2)
     return (
       <div onClick={this.showInvoice} className="text-left invoice-tile">
-        <li>Invoice number: {this.props.invoice_number} | Received: {this.props.date} | Amount owed: ${this.props.amount}</li>
+        <li>Invoice number: {this.props.invoice_number} | Received: {this.props.date} | Amount owed: ${amount}</li>
         {overlay}
       </div>
     )

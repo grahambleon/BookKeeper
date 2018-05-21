@@ -12,13 +12,15 @@ class HomePage extends React.Component {
       accounts: [],
       invoices: [],
       header: 'Welcome',
-      newAccountName: ''
+      newAccountName: '',
+      invoiceNumber: ''
     }
-    this.sortInvoicesByAccount = this.sortInvoicesByAccount.bind(this)
+    this.findInvoicesByAccount = this.findInvoicesByAccount.bind(this)
+    this.findInvoicesByNumber = this.findInvoicesByNumber.bind(this)
     this.handleAccountSubmit = this.handleAccountSubmit.bind(this)
     this.addNewData = this.addNewData.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleDateChange = this.handleDateChange.bind(this)
+    this.findInvoicesByDate = this.findInvoicesByDate.bind(this)
   }
 
   addNewData(payload, url) {
@@ -83,7 +85,7 @@ class HomePage extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleDateChange(date) {
+  findInvoicesByDate(date) {
     fetch(`/api/v1/dates/${date.format('MM-DD-YYYY')}.json`, {
       credentials: 'same-origin',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
@@ -107,7 +109,7 @@ class HomePage extends React.Component {
     .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
-  sortInvoicesByAccount(event){
+  findInvoicesByAccount(event){
     fetch(`/api/v1/accounts/${event.target.value}.json`, {
       credentials: 'same-origin',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
@@ -131,6 +133,32 @@ class HomePage extends React.Component {
     .catch(error => console.error (`Error in fetch: ${error.message}`));
   }
 
+  findInvoicesByNumber(event){
+    event.preventDefault()
+    fetch(`/api/v1/invoice_number/${this.state.invoiceNumber}.json`, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        invoices: body,
+        header: body[0].invoice_number,
+        invoiceNumber: ''
+      });
+    })
+    .catch(error => console.error (`Error in fetch: ${error.message}`));
+  }
+
   render() {
     console.log(this.state);
       let page = [];
@@ -141,7 +169,7 @@ class HomePage extends React.Component {
           <option
             key={account.id}
             value={account.id}
-            onClick={this.sortInvoicesByAccount}
+            onClick={this.findInvoicesByAccount}
             >
             {account.company_name}
           </option>
@@ -166,13 +194,21 @@ class HomePage extends React.Component {
           </div>
           <div className='columns medium-4 options-panel'>
             <label>Select by account:</label>
-            <select onChange={this.sortInvoicesByAccount}>
+            <select onChange={this.findInvoicesByAccount}>
               <option value='0'>---</option>
               {accountList}
             </select>
+            <form onSubmit={this.findInvoicesByNumber}>
+              <InvoiceFormField
+                label='Select by invoice number:'
+                name='invoiceNumber'
+                value={this.state.invoiceNumber}
+                handleChange={this.handleChange}
+              />
+            </form>
             <DateFormField
               label='Select by date:'
-              handleChange={this.handleDateChange}
+              handleChange={this.findInvoicesByDate}
             />
             <Graph accounts={accountList}/>
             <form onSubmit={this.handleAccountSubmit}>

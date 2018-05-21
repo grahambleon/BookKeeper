@@ -5,6 +5,7 @@ const InvoiceList = (props) => {
 
   let invoices;
   invoices = props.invoices.map((invoice) => {
+    let amount = Number(invoice.amount).toFixed(2)
     return (
       <div className='invoice-item' key={invoice.id}>
         <InvoiceTile
@@ -12,7 +13,7 @@ const InvoiceList = (props) => {
           purchases={invoice.purchases}
           invoice_number={invoice.invoice_number}
           date={invoice.date_received}
-          amount={invoice.amount}
+          amount={amount}
         />
       </div>
     )

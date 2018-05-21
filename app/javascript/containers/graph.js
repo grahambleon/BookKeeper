@@ -40,7 +40,7 @@ class Graph extends React.Component {
 
     return (
       <div onClick={this.showGraph}>
-        <div>Visualize</div>
+        <div className='visualize-button'>Account Graph</div>
         <div>
           {overlay}
         </div>

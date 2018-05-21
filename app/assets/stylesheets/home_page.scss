@@ -11,7 +11,7 @@
   background-color: #75777F;
   padding: 2%;
   margin: 3.5%;
-  width: 20%;
+  width: 24.5%;
   border: 1px solid #b5bacc;
 }
 
@@ -68,12 +68,39 @@
   color: $dark-sienna;
 }
 
-.column.medium-6.medium-centered.text-center.graph {
+.row.graph {
   position: static;
   padding: 25px;
   background-color: rgb(252, 222, 190);
   font-size: 36px;
   color: $dark-sienna;
+  width: 65%;
+  margin-left: 18%;
+}
+
+.visualize-button {
+    background-color: skyblue;
+    width: fit-content;
+    padding: 6%;
+    margin: auto;
+    margin-bottom: 7%;
+}
+
+.visualize-button:hover {
+  background-color: violet;
+}
+
+.graph-instruction {
+  background-color: $dark-sienna;
+  color: $black-coral;
+  font-size: 22px;
+  padding: 15%;
+  padding-bottom: 45%;
+}
+
+.graph-functions {
+    width: 36%;
+    margin-left: 12%;
 }
 
 label, em {

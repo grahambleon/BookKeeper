@@ -51,15 +51,21 @@ class DyGraph extends Component {
   render() {
     return(
       <div className="overlay">
-        <div className="column medium-6 medium-centered text-center graph">
-          <div className='graph-instruction'>Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
-          <label>Select Account:</label>
-          <select onChange={this.fetchGraphData}>
-            <option value='0'>---</option>
-            {this.props.accounts}
-          </select>
-          <button onClick={this.renderGraph}>VISUALIZE!!!! =D</button>
-          <div id='graphContainer'></div>
+        <div className="row graph">
+          <div className='column medium-5'>
+            <div className='graph-instruction'>Choose an account and click the 'Visualize Data' button to view the graph.  Click and drag over a specific period of time to examine closer.  Press escape to close the graph.</div>
+          </div>
+          <div className='column medium-7'>
+            <div className='graph-functions'>
+              <label>Select Account:</label>
+              <select onChange={this.fetchGraphData}>
+                <option value='0'>---</option>
+                {this.props.accounts}
+              </select>
+              <button onClick={this.renderGraph}>Visualize Data</button>
+            </div>
+            <div id='graphContainer'></div>
+          </div>
         </div>
       </div>
     )

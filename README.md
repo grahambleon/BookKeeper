@@ -11,7 +11,7 @@ Login credentials for example purposes:
 -email: demo@email.com
 -password: password
 
-This is a work in progress.  Feel free to poke around and check things. Any issues you find please report them!  I'd really appreciate any and all feedback.  I plan to keep iterating on this so also if you have suggested feature let me know.
+This is a work in progress.  Feel free to poke around and check things out. Any issues you find please report them!  I'd really appreciate any and all feedback.  I plan to keep iterating on this so also if you have suggested feature let me know.
 
  Things I'm still working on:
 

@@ -23,7 +23,7 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
   end
 
   describe "GET#show" do
-    it "should return a list of all accounts and their basic info" do
+    it "should return a specific account and their basic info and corresponding invoices and purchases" do
 
       sign_in user
 
@@ -35,6 +35,24 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
 
       expect(returned_json.length).to eq 1
       expect(returned_json.first["company_name"]).to eq("Russo's")
+      expect(returned_json.first["invoices"].length).to eq 1
+    end
+  end
+
+  describe "GET#graph" do
+    it "should return a specific account and its invoices" do
+
+      sign_in user
+
+      get :graph, params: { id: account.id }
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json")
+
+      expect(returned_json.length).to eq 1
+      expect(returned_json.first["company_name"]).to eq("Russo's")
+      expect(returned_json.first["invoices"].length).to eq 1
     end
   end
 

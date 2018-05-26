@@ -15,7 +15,6 @@ class Api::V1::AccountsController < ApplicationController
   end
 
   def create
-    binding.pry
     @account = Account.new(account_params)
     @account.user = current_user
 

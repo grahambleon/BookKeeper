@@ -23,7 +23,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   end
 
   describe "GET#show" do
-    it "should return a specific invoice, it's account ID and purchases" do
+    it "should return a specific invoice" do
 
       sign_in user
 
@@ -34,14 +34,12 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
       expect(response.content_type).to eq("application/json")
 
       expect(returned_json.length).to eq 1
-      # expect(returned_json.first["company_name"]).to eq("Russo's")
-      # expect(returned_json.first["invoices"].length).to eq 1
     end
 
     it "should return a specific invoice's account ID" do
       sign_in user
 
-      get :show, params: { id: account.id }
+      get :show, params: { id: invoice.id }
       returned_json = JSON.parse(response.body)
 
       expect(returned_json.first["account_id"]).to eq(account.id)
@@ -50,33 +48,11 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     it "should return a specific invoice's purchases" do
       sign_in user
 
-      get :show, params: { id: account.id }
+      get :show, params: { id: invoice.id }
       returned_json = JSON.parse(response.body)
+
+      expect(returned_json.first["purchases"].length).to eq(1)
+      expect(returned_json.first["purchases"].first["product_name"]).to eq("Taters")
     end
   end
-
-  # describe "POST#create" do
-  #   it "creates a new account" do
-  #
-  #     sign_in user
-  #     post_json = { company_name: "Paul Marks" }
-  #
-  #     prev_count = Account.count
-  #     post(:create, format: JSON, params: post_json)
-  #     expect(Account.count).to eq(prev_count + 1)
-  #   end
-  #
-  #   it "Returns a JSON with the new account" do
-  #     sign_in user
-  #     post_json = { company_name: "Paul Marks" }
-  #
-  #     post(:create, format: JSON, params: post_json)
-  #     returned_json = JSON.parse(response.body)
-  #     expect(response.status).to eq 200
-  #     expect(response.content_type).to eq("application/json")
-  #     expect(returned_json).to be_kind_of(Hash)
-  #     expect(returned_json).to_not be_kind_of(Array)
-  #     expect(returned_json["company_name"]).to eq("Paul Marks")
-  #   end
-  # end
 end

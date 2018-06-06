@@ -54,5 +54,42 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
       expect(returned_json.first["purchases"].length).to eq(1)
       expect(returned_json.first["purchases"].first["product_name"]).to eq("Taters")
     end
+
+    it "should create a new invoice" do
+      sign_in user
+      post_json = { invoice_number: "1337", amount: "13.37", date_received: "05-01-2018", account_id: account }
+
+      prev_count = Invoice.count
+      post(:create, format: JSON, params: post_json)
+      expect(Invoice.count).to eq(prev_count + 1)
+    end
+
+    it "should create a new invoice" do
+      sign_in user
+      post_json = { invoice_number: "1337", amount: "13.37", date_received: "05-01-2018", account_id: account }
+
+      post(:create, format: JSON, params: post_json)
+      returned_json = JSON.parse(response.body)
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json")
+      expect(returned_json).to be_kind_of(Hash)
+      expect(returned_json).to_not be_kind_of(Array)
+      expect(returned_json["invoice_number"]).to eq("1337")
+    end
+
+    it "should create the purchases associated with the invoice" do
+      sign_in user
+      post_json = {
+        invoice_number: "1337",
+        amount: "13.37",
+        date_received: "05-01-2018",
+        account_id: account,
+        purchases: "[{\"product_id\":\"123\",\"product_name\":\"123\",\"quantity\":\"123\",\"unit_price\":\"123\",\"total_price\":\"123.00\",\"key\":0}]"}
+
+      prev_count = Purchase.count
+      post(:create, format: JSON, params: post_json)
+      expect(Purchase.count).to eq(prev_count + 1)
+    end
+
   end
 end

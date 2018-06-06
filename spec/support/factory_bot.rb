@@ -9,3 +9,9 @@ FactoryBot.define do
     address '123 fake street'
   end
 end
+
+# FactoryBot.define do
+#   factory :attachment do
+#     photo Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/myfiles/myfile.jpg')))
+#   end
+# end

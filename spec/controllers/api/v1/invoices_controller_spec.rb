@@ -66,7 +66,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
 
     it "should create a new invoice" do
       sign_in user
-      post_json = { invoice_number: "1337", amount: "13.37", date_received: "05-01-2018", account_id: account }
+      post_json = { invoice_number: "1337", amount: "13.37", date_received: "05-01-2018", account_id: account, invoice_image: '<File:/var/folders/pp/bdccvc4x0_16_llbv4dvv7f80000gn/T/RackMultipart20180605-85518-1py7jyo.jpg>'}
 
       post(:create, format: JSON, params: post_json)
       returned_json = JSON.parse(response.body)

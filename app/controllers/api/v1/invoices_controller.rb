@@ -14,12 +14,13 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def create
-
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
     if @invoice.save!
-      JSON.parse(params["purchases"]).each do |purchase|
-        Purchase.create!(purchase_params(purchase, @invoice))
+      if params["purchases"]
+        JSON.parse(params["purchases"]).each do |purchase|
+          Purchase.create!(purchase_params(purchase, @invoice))
+        end
       end
       render json: @invoice, each_serializer: InvoiceListSerializer
     else

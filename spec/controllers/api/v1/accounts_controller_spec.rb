@@ -57,21 +57,23 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
   end
 
   describe "POST#create" do
+    before(:all) do
+      @post_json = { company_name: "Paul Marks" }
+    end
+
     it "creates a new account" do
 
       sign_in user
-      post_json = { company_name: "Paul Marks" }
 
       prev_count = Account.count
-      post(:create, format: JSON, params: post_json)
+      post(:create, format: JSON, params: @post_json)
       expect(Account.count).to eq(prev_count + 1)
     end
 
     it "Returns a JSON with the new account" do
       sign_in user
-      post_json = { company_name: "Paul Marks" }
 
-      post(:create, format: JSON, params: post_json)
+      post(:create, format: JSON, params: @post_json)
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")

@@ -10,50 +10,29 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     sign_in user
   end
 
-  describe "GET#index" do
-    it "should return a list of all invoices and their basic info" do
-
-      get :index
-      returned_json = JSON.parse(response.body)
-
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq("application/json")
-
-      expect(returned_json.length).to eq 1
-      expect(returned_json.first["invoice_number"]).to eq("1337")
-    end
-  end
-
   describe "GET#show" do
+
+    before(:each) do
+      get :show, params: { id: invoice.id }
+      @returned_json = JSON.parse(response.body)
+    end
 
     it "should return a specific invoice" do
 
-      get :show, params: { id: invoice.id }
-      returned_json = JSON.parse(response.body)
-
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
-
-      expect(returned_json.length).to eq 1
+      expect(@returned_json.length).to eq 1
     end
 
     it "should return a specific invoice's account ID" do
 
-
-      get :show, params: { id: invoice.id }
-      returned_json = JSON.parse(response.body)
-
-      expect(returned_json.first["account_id"]).to eq(account.id)
+      expect(@returned_json.first["account_id"]).to eq(account.id)
     end
 
     it "should return a specific invoice's purchases" do
 
-
-      get :show, params: { id: invoice.id }
-      returned_json = JSON.parse(response.body)
-
-      expect(returned_json.first["purchases"].length).to eq(1)
-      expect(returned_json.first["purchases"].first["product_name"]).to eq("Taters")
+      expect(@returned_json.first["purchases"].length).to eq(1)
+      expect(@returned_json.first["purchases"].first["product_name"]).to eq("Taters")
     end
   end
 
@@ -92,6 +71,33 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
       post(:create, format: JSON, params: @post_json)
       expect(Purchase.count).to eq(prev_count + 1)
     end
+  end
 
+  describe "GET#date" do
+    it "should return the invoices that occurred on a specific date" do
+
+      get :date, params: { date: invoice.date_received }
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json")
+
+      expect(returned_json.length).to eq 1
+      expect(returned_json.first["purchases"]).to eq(nil)
+    end
+  end
+
+  describe "GET#invoice_number" do
+    it "should return the invoices that occurred on a specific date" do
+
+      get :invoice_number, params: { invoice_number: invoice.invoice_number }
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json")
+
+      expect(returned_json.length).to eq 1
+      expect(returned_json.first["purchases"]).to eq(nil)
+    end
   end
 end

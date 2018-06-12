@@ -25,6 +25,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   end
 
   describe "GET#show" do
+
     it "should return a specific invoice" do
 
       get :show, params: { id: invoice.id }
@@ -54,6 +55,9 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
       expect(returned_json.first["purchases"].length).to eq(1)
       expect(returned_json.first["purchases"].first["product_name"]).to eq("Taters")
     end
+  end
+
+  describe "GET#create" do
 
     it "should create a new invoice" do
 

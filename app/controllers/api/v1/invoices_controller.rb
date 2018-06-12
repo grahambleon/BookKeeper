@@ -1,5 +1,6 @@
 class Api::V1::InvoicesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
+  protect_from_forgery unless: -> { request.format.json? }
 
   def index
     @invoices = Invoice.where(user_id: current_user)

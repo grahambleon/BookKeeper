@@ -1,17 +1,6 @@
 class Api::V1::InvoicesController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
-  def index
-    @invoices = Invoice.where(user_id: current_user)
-
-    render json: @invoices, each_serializer: InvoiceListSerializer
-  end
-
-  def show
-    @invoice = Invoice.where(id: params["id"])
-
-    render json: @invoice, each_serializer: InvoiceShowSerializer
-  end
+  skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
     @invoice = Invoice.new(invoice_params)
@@ -31,11 +20,17 @@ class Api::V1::InvoicesController < ApplicationController
   def date
     @invoice = Invoice.where(date_received: params["date"])
 
-    render json: @invoice, each_serializer: InvoiceShowSerializer
+    render json: @invoice, each_serializer: InvoiceListSerializer
   end
 
   def invoice_number
     @invoice = Invoice.where(invoice_number: params["invoice_number"])
+
+    render json: @invoice, each_serializer: InvoiceListSerializer
+  end
+
+  def show
+    @invoice = Invoice.where(id: params["id"])
 
     render json: @invoice, each_serializer: InvoiceShowSerializer
   end

@@ -57,22 +57,27 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
     end
   end
 
-  describe "GET#create" do
+  describe "POST#create" do
+    before(:each) do
+      @post_json = {
+        invoice_number: "1337",
+        amount: "13.37",
+        date_received: "05-01-2018",
+        account_id: account,
+        invoice_image: "<File:/var/folders/pp/bdccvc4x0_16_llbv4dvv7f80000gn/T/RackMultipart20180605-85518-1py7jyo.jpg>",
+        purchases: "[{\"product_id\":\"123\",\"product_name\":\"123\",\"quantity\":\"123\",\"unit_price\":\"123\",\"total_price\":\"123.00\",\"key\":0}]"}
+    end
 
     it "should create a new invoice" do
 
-      post_json = { invoice_number: "1337", amount: "13.37", date_received: "05-01-2018", account_id: account }
-
       prev_count = Invoice.count
-      post(:create, format: JSON, params: post_json)
+      post(:create, format: JSON, params: @post_json)
       expect(Invoice.count).to eq(prev_count + 1)
     end
 
     it "should create a new invoice" do
 
-      post_json = { invoice_number: "1337", amount: "13.37", date_received: "05-01-2018", account_id: account, invoice_image: '<File:/var/folders/pp/bdccvc4x0_16_llbv4dvv7f80000gn/T/RackMultipart20180605-85518-1py7jyo.jpg>'}
-
-      post(:create, format: JSON, params: post_json)
+      post(:create, format: JSON, params: @post_json)
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
@@ -83,15 +88,8 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
 
     it "should create the purchases associated with the invoice" do
 
-      post_json = {
-        invoice_number: "1337",
-        amount: "13.37",
-        date_received: "05-01-2018",
-        account_id: account,
-        purchases: "[{\"product_id\":\"123\",\"product_name\":\"123\",\"quantity\":\"123\",\"unit_price\":\"123\",\"total_price\":\"123.00\",\"key\":0}]"}
-
       prev_count = Purchase.count
-      post(:create, format: JSON, params: post_json)
+      post(:create, format: JSON, params: @post_json)
       expect(Purchase.count).to eq(prev_count + 1)
     end
 

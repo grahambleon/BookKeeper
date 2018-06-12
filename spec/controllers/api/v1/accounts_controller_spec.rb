@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::AccountsController, type: :controller do
+
   let!(:user) { User.create!(email: "me@aol.com", business_name: "ehhh", password: "123456", address:"123 fake street") }
   let!(:account) { Account.create!(company_name: "Russo's", user: user) }
   let!(:invoice) { Invoice.create!(invoice_number: "1337", amount: 200.00, date_received: "2/4/2017", account: account, user: user) }
@@ -8,6 +9,7 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
   before(:each) do
     sign_in user
   end
+
   describe "GET#index" do
     it "should return a list of all accounts and their basic info" do
 
@@ -65,7 +67,7 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
     end
 
     it "Returns a JSON with the new account" do
-      
+
       post(:create, format: JSON, params: @post_json)
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200

@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import InvoiceList from '../../../app/javascript/containers/invoice-list';
-import testInvoices from '../fixtures/testInvoices.json'
+import fakeShowAccount from '../fixtures/fakeShowAccount.json'
 
 describe('<InvoiceList />', () => {
 
   const wrapper = mount(
-    <InvoiceList invoices={testInvoices}/>
+    <InvoiceList invoices={fakeShowAccount}/>
   )
 
   it('renders properly', () => {

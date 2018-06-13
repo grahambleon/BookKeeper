@@ -10,8 +10,6 @@
         "date_received": "2017-04-02",
         "account_id": 2,
         "user_id": 1,
-        "created_at": "2018-05-17T22:31:54.238Z",
-        "updated_at": "2018-05-17T22:31:54.238Z",
         "invoice_image": {
         "url": null
         }

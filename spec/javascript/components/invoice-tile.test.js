@@ -1,17 +1,17 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import InvoiceTile from '../../../app/javascript/components/invoice-tile';
-import testInvoices from '../fixtures/testInvoices.json'
+import fakeShowInvoice from '../fixtures/fakeShowInvoice.json'
 
 describe('<InvoiceTile />', () => {
 
   const wrapper = mount(
     <InvoiceTile
-      key={testInvoices[0].id}
-      purchases={testInvoices[0].purchases}
-      invoice_number={testInvoices[0].invoice_number}
-      date={testInvoices[0].date_received}
-      amount={testInvoices[0].amount}
+      key={fakeShowInvoice[0].id}
+      purchases={fakeShowInvoice[0].purchases}
+      invoice_number={fakeShowInvoice[0].invoice_number}
+      date={fakeShowInvoice[0].date_received}
+      amount={fakeShowInvoice[0].amount}
     />
   )
 

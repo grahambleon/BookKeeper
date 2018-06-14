@@ -44,7 +44,7 @@ describe('<FullInvoice />', () => {
   it('should render text based on the information retreived', () => {
     setTimeout(() => {
       expect(wrapper.containsMatchingElement(
-
+        <div>Invoice number: 2/4/2017</div>
       )).toBeTruthy()
       done()
     }, 0)

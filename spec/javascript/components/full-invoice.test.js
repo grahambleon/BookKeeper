@@ -12,7 +12,6 @@ beforeEach(() => {
       id={2}
     />
   )
-
   fetchMock.get(`/api/v1/invoices/${wrapper.id}`, {
     status: 200,
     body: fakeShowInvoice
@@ -29,7 +28,15 @@ describe('<FullInvoice />', () => {
 
   it('should fetch purchases for the invoice', () => {
     setTimeout(() => {
-      expect(wrapper.state('id')).toEqual("2")
+      expect(wrapper.state('invoiceNumber')).toEqual("1337")
+      done()
+    }, 0)
+  })
+
+  it('should fetch purchases for the invoice', () => {
+    setTimeout(() => {
+      expect(wrapper.state('purchases').length).toEqual(1)
+      expect(wrapper.state('purchases')[0].product_name).toEqual("Taters")
       done()
     }, 0)
   })

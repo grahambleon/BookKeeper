@@ -8,7 +8,7 @@ describe('<FullInvoice />', () => {
 
   let wrapper;
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = mount(
       <FullInvoice
         id={1}
@@ -20,7 +20,7 @@ describe('<FullInvoice />', () => {
     });
   })
 
-  afterAll(fetchMock.restore)
+  afterEach(fetchMock.restore)
 
   it('renders properly', () => {
     expect(wrapper.length).toBe(1);

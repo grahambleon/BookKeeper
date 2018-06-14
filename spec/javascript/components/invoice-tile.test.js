@@ -30,7 +30,7 @@ describe('<InvoiceTile />', () => {
 
   it('should have the basic invoice header info', () => {
     expect(wrapper.containsMatchingElement(
-      <h5>Invoice number: 1337 Received: 2/4/2017 Amount owed: $200.0</h5>
-    ))
+      <li>Invoice number: 1337 | Received: 2/4/2017 | Amount owed: $200.00</li>
+    )).toBeTruthy()
   })
 })

@@ -5,7 +5,6 @@ class FullInvoice extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: '',
       invoiceNumber: '',
       date: '',
       amount: '',
@@ -31,7 +30,6 @@ class FullInvoice extends React.Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        id: body[0].id,
         invoiceNumber: body[0].invoice_number,
         amount: body[0].amount,
         date: body[0].date_received,

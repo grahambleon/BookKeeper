@@ -8,7 +8,7 @@ This is my capstone project for Launch Academy.  It's an app for storing invoice
 Check it out at https://bookkeeper-gg.herokuapp.com/
 
 Login credentials for example purposes:
--email: demo@email.com
+-email: demo@gemail.com
 -password: password
 
 This is a work in progress.  Feel free to poke around and check things out. Any issues you find please report them!  I'd really appreciate any and all feedback.  I plan to keep iterating on this so also if you have suggested feature let me know.

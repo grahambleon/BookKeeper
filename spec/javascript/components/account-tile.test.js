@@ -6,7 +6,7 @@ describe('<AccountTile />', () => {
 
   const wrapper = mount(
     <AccountTile
-      value='1'
+      value='2'
       name='Russos'
     />
   )

@@ -1,6 +1,3 @@
-[![Codeship Status for grahambleon/BookKeeper](https://app.codeship.com/projects/0552e820-32ad-0136-bc59-229473589d0c/status?branch=master)](https://app.codeship.com/projects/288909)
-[![Coverage Status](https://coveralls.io/repos/github/grahambleon/BookKeeper/badge.svg?branch=master)](https://coveralls.io/github/grahambleon/BookKeeper?branch=master)
-
 # README
 
 This is my capstone project for Launch Academy.  It's an app for storing invoices and analyzing past expenditures.

@@ -9,7 +9,7 @@
     "@rails/webpacker": "~3.4.0",
     "babel-preset-react": "~6.24.1",
     "dygraphs": "^2.1.0",
-    "moment": "^2.22.1",
+    "moment": "^2.29.2",
     "prop-types": "~15.6.0",
     "react": "~15.4.2",
     "react-datetime": "^2.14.0",
